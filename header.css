@@ -1,0 +1,10 @@
+*{
+  margin: 0px;
+  padding: 0px;
+  font-family: Avenir, sans-serif;
+}
+header{
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+}
