@@ -7,4 +7,23 @@ header{
   display: flex;
   flex-direction: row;
   text-align: center;
+  background-color: lightblue;
+  padding-left: 42%;
+}
+li{
+  list-style-type: none;
+  padding: 15px;
+  border: solid;
+  margin: 10px;
+}
+a{
+  text-decoration: none;
+  color : black;
+}
+a:hover{
+  color: white;
+  scale: 1.25;
+}
+.img{
+  scale : 0.5;
 }
