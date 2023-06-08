@@ -4,5 +4,7 @@
   font-family: Avenir, sans-serif;
 }
 header{
+  display: flex;
+  flex-direction: row;
   text-align: center;
 }
