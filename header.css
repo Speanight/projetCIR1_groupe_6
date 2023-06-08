@@ -8,13 +8,15 @@ header{
   flex-direction: row;
   text-align: center;
   background-color: lightblue;
-  padding-left: 42%;
+  padding-left: 38%;
 }
 li{
   list-style-type: none;
   padding: 15px;
   border: solid;
+  border-radius: 10px;
   margin: 10px;
+  margin-right: 60px;
 }
 a{
   text-decoration: none;
