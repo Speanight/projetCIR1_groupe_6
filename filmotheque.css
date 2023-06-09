@@ -1,5 +1,12 @@
 #input1 {
-    border-style: solid;
-    align-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border: solid 1px;
     width: 15.2%;
+    text-decoration: none;
+}
+
+input{
+    border: none;
 }
