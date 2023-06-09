@@ -54,3 +54,19 @@ input:focus {
     justify-content:flex-start;
     margin-top: 20px;
 }
+
+td {
+    border: 1px solid #333;
+    padding: 50px;
+}
+
+table{
+    border: 2px solid black
+    
+}
+
+#table{
+    margin-top: 75px;
+    margin-left: auto;
+    margin-right: auto;
+}
