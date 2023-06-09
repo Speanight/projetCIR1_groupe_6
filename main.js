@@ -1,4 +1,4 @@
 function main(){
-    writeFile("time","fonction")
+    writeFile("searchbutton","searchbutton")
 }
 main();
