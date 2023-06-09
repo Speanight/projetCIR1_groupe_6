@@ -1,4 +1,6 @@
-
+body{
+    background-color: #D5D5D5;
+}
 #input1 {
     display: flex;
     align-items: center;
@@ -44,9 +46,7 @@ input:focus {
     border: none;
     margin: 20px;
     border-radius: 2px;
-}
-#searchbutton:hover{
-    background-color: #c4bfbf;
+    cursor: pointer;
 }
 
 #recherche{
