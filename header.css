@@ -8,7 +8,7 @@ header{
   flex-direction: row;
   text-align: center;
   background-color: #73141B;
-  padding-left: 38%;
+  padding-left: 42%;
 }
 li{
   list-style-type: none;
@@ -30,5 +30,5 @@ a:hover{
   scale : 0.5;
 }
 body{
-  background-color: #8F90A6;
+  background-color: #D5D5D5;
 }
