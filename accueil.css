@@ -2,17 +2,21 @@ p{
     margin: 20px;
     text-align: center;
     padding: 10px;
+    font-size: 25px;
 }
 h1{
+    margin : 15px;
+    text-shadow:   -1px -1px 0 #751C1C,  
+    1px -1px 0 #751C1C,
+    -1px 1px 0 #751C1C,
+     1px 1px 0 #751C1C,
+     1px 1px 10px #141414;color:#DE3535;
     text-align: center;
-    padding: 10px;
-    text-decoration: underline;
-    color : #73141B;
-    margin: 20px; 
+    font-size: 100px;
 }
 .button{
   display: inline-block;
-  background-color: #8F90A6;
+  background-color: #73141B;
   border-radius: 10px;
   border: 1px double #cccccc;
   color: #E1D6BA;
