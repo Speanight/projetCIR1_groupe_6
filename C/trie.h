@@ -29,14 +29,16 @@ char* toLower(char* str);
 struct NodeTrie* buildTrieFromFile(char* nameFile);
 
 struct NodeTrie* createEmptyNodeTrie();
-void insertWord(struct NodeTrie* trie, struct Movie* m);
+void insertMovie(struct NodeTrie* trie, struct Movie* m);
 void deleteWord(struct NodeTrie* trie, char* word);
-bool findWord(struct NodeTrie* trie, char* word);
+struct List* findMovies(struct NodeTrie* trie, char* realisateur);
 void deleteNodeTrie(struct NodeTrie** trie);     // free d'une feuille.
 unsigned int numberOfWords(struct NodeTrie* trie);
 void deleteTrie(struct NodeTrie* tree);
 void displayDict(struct NodeTrie* trie, char* actualWord, int index);
 
+
+void exportFromRealisateurs(struct NodeTrie* trie, char* realisateur, char* textFile);
 void writeWord(struct NodeTrie* trie);
 
 #endif //PROJETCIR1_GROUPE_6_TRIE_H

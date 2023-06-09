@@ -57,7 +57,7 @@ void deleteFirst(struct List* l) {
     free(c);
 }
 
-void printList(struct List* l) {
+void printMovies(struct List* l) {
     if (listSize(l) == 0) {
         printf("NULL\n");
         return;
@@ -66,7 +66,7 @@ void printList(struct List* l) {
 
     unsigned int size = listSize(l);
     for (int i = 0; i < size; i++) {
-        printf("%s -> ", temp->movie->titre);
+        printf("%s;%s;%d;%s\n", temp->movie->titre, temp->movie->realisateur, temp->movie->duree, temp->movie->genre);
         temp = temp->next;
     }
     printf("NULL\n");
