@@ -16,7 +16,7 @@ body{
 span{
     visibility: hidden;
 }
-#time:invalid span{
+#time:invalid{
     color: red;
     visibility: visible;
 }
