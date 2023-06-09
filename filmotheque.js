@@ -8,8 +8,8 @@ function disabledSearch(){
     let input1 = document.getElementById("real");
     let input2 = document.getElementById("time");
     let but = document.getElementById("searchbutton");
-    input1.addEventListener('input', );
-    input2.addEventListener('input', );
+    input1.addEventListener('input', toggleSearchButton);
+    input2.addEventListener('input', toggleSearchButton);
     but.disabled = true;
 
     function toggleSearchButton() {
