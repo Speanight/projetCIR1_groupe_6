@@ -7,7 +7,7 @@ header{
   display: flex;
   flex-direction: row;
   text-align: center;
-  background-color: lightblue;
+  background-color: #73141B;
   padding-left: 38%;
 }
 li{
@@ -20,12 +20,15 @@ li{
 }
 a{
   text-decoration: none;
-  color : black;
+  color : #E1D6BA;
 }
 a:hover{
-  color: white;
+  color: #E1D6BA;
   scale: 1.25;
 }
 .img{
   scale : 0.5;
+}
+body{
+  background-color: #8F90A6;
 }
