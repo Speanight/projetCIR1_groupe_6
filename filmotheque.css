@@ -1,20 +1,20 @@
 body{
     background-color: #D5D5D5;
 }
-#input1 {
+#input1{
     display: flex;
     align-items: center;
     justify-content: space-around;
     border: solid 1px;
-    width: 15%;
+    width: 17.5%;
     text-decoration: none;
     background-color: #e2e0e0;
     margin: 20px;
-    border-radius: 2px;
+    border-radius: 0px 15px 15px 0px;
 }
-
-span{
-    visibility: hidden;
+#real:invalid{
+    color: red;
+    visibility: visible;
 }
 #time:invalid{
     color: red;
@@ -26,11 +26,11 @@ span{
     align-items: center;
     justify-content: space-around;
     border: solid 1px;
-    width: 15%;
+    width: 17.5%;
     text-decoration: none;
     background-color: #e2e0e0;
     margin: 20px;
-    border-radius: 2px;
+    border-radius: 0px 15px 15px 0px;
 }
 
 input{
@@ -47,14 +47,11 @@ input:focus {
     padding-top: 5px;
 }
 
-#searchbutton{
+#butTime{
     height: 27px;
-    width: 50px;
-    background-color: #e2e0e0;
+    align-self: right;
     border: none;
-    margin: 20px;
-    border-radius: 2px;
-    cursor: pointer;
+    border-radius: 0px 15px 15px 0px;
 }
 
 #recherche{
@@ -63,25 +60,16 @@ input:focus {
     margin-top: 20px;
 }
 
-#searchWithName{
-    background: none;
-    border: 4px solid #fff;
-    border-radius: 10px;
-    color: #fff;
-    display: block;
-    font-size: 1.6em;
-    font-weight: bold;
-    margin: 10px auto;
-    padding: 2em 6em;
-    position: relative;
-    text-transform: uppercase;
+#butName{
+    height: 27px;
+    align-self: right;
+    border: none;
+    border-radius: 0px 15px 15px 0px;
 }
-#searchWithName::after {
-    height: 0;
-    left: 0;
-    top: 0;
-    width: 100%;
-  }
-  #searchWithName:hover:after {
-    height: 100%;
-  }
+
+.send{
+    width: 27px;
+    height: auto;
+    background-color: #e2e0e0;
+    border-radius: 0px 15px 15px 0px ;
+}
