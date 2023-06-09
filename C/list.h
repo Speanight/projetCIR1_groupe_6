@@ -23,7 +23,7 @@ void addFirst(struct List* l, struct Movie* movie);
 bool isListEmpty(struct List* l);
 struct Movie* getItemPos(struct List* l, unsigned int position, bool* valid);
 void deleteFirst(struct List* l);
-void printList(struct List* l);
+void printMovies(struct List* l);
 unsigned int listSize(struct List* l);
 void addItemPos(struct List* l, struct Movie* movie, unsigned int position, bool* valid);
 void deleteItemPos(struct List* l, unsigned int position, bool* valid);
