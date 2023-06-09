@@ -123,59 +123,113 @@ projetCIR1_groupe_6/fast:
 	$(MAKE) -f CMakeFiles/projetCIR1_groupe_6.dir/build.make CMakeFiles/projetCIR1_groupe_6.dir/build
 .PHONY : projetCIR1_groupe_6/fast
 
-main.o: main.c.o
+C/list.o: C/list.c.o
 
-.PHONY : main.o
-
-# target to build an object file
-main.c.o:
-	$(MAKE) -f CMakeFiles/projetCIR1_groupe_6.dir/build.make CMakeFiles/projetCIR1_groupe_6.dir/main.c.o
-.PHONY : main.c.o
-
-main.i: main.c.i
-
-.PHONY : main.i
-
-# target to preprocess a source file
-main.c.i:
-	$(MAKE) -f CMakeFiles/projetCIR1_groupe_6.dir/build.make CMakeFiles/projetCIR1_groupe_6.dir/main.c.i
-.PHONY : main.c.i
-
-main.s: main.c.s
-
-.PHONY : main.s
-
-# target to generate assembly for a file
-main.c.s:
-	$(MAKE) -f CMakeFiles/projetCIR1_groupe_6.dir/build.make CMakeFiles/projetCIR1_groupe_6.dir/main.c.s
-.PHONY : main.c.s
-
-trie.o: trie.c.o
-
-.PHONY : trie.o
+.PHONY : C/list.o
 
 # target to build an object file
-trie.c.o:
-	$(MAKE) -f CMakeFiles/projetCIR1_groupe_6.dir/build.make CMakeFiles/projetCIR1_groupe_6.dir/trie.c.o
-.PHONY : trie.c.o
+C/list.c.o:
+	$(MAKE) -f CMakeFiles/projetCIR1_groupe_6.dir/build.make CMakeFiles/projetCIR1_groupe_6.dir/C/list.c.o
+.PHONY : C/list.c.o
 
-trie.i: trie.c.i
+C/list.i: C/list.c.i
 
-.PHONY : trie.i
+.PHONY : C/list.i
 
 # target to preprocess a source file
-trie.c.i:
-	$(MAKE) -f CMakeFiles/projetCIR1_groupe_6.dir/build.make CMakeFiles/projetCIR1_groupe_6.dir/trie.c.i
-.PHONY : trie.c.i
+C/list.c.i:
+	$(MAKE) -f CMakeFiles/projetCIR1_groupe_6.dir/build.make CMakeFiles/projetCIR1_groupe_6.dir/C/list.c.i
+.PHONY : C/list.c.i
 
-trie.s: trie.c.s
+C/list.s: C/list.c.s
 
-.PHONY : trie.s
+.PHONY : C/list.s
 
 # target to generate assembly for a file
-trie.c.s:
-	$(MAKE) -f CMakeFiles/projetCIR1_groupe_6.dir/build.make CMakeFiles/projetCIR1_groupe_6.dir/trie.c.s
-.PHONY : trie.c.s
+C/list.c.s:
+	$(MAKE) -f CMakeFiles/projetCIR1_groupe_6.dir/build.make CMakeFiles/projetCIR1_groupe_6.dir/C/list.c.s
+.PHONY : C/list.c.s
+
+C/main.o: C/main.c.o
+
+.PHONY : C/main.o
+
+# target to build an object file
+C/main.c.o:
+	$(MAKE) -f CMakeFiles/projetCIR1_groupe_6.dir/build.make CMakeFiles/projetCIR1_groupe_6.dir/C/main.c.o
+.PHONY : C/main.c.o
+
+C/main.i: C/main.c.i
+
+.PHONY : C/main.i
+
+# target to preprocess a source file
+C/main.c.i:
+	$(MAKE) -f CMakeFiles/projetCIR1_groupe_6.dir/build.make CMakeFiles/projetCIR1_groupe_6.dir/C/main.c.i
+.PHONY : C/main.c.i
+
+C/main.s: C/main.c.s
+
+.PHONY : C/main.s
+
+# target to generate assembly for a file
+C/main.c.s:
+	$(MAKE) -f CMakeFiles/projetCIR1_groupe_6.dir/build.make CMakeFiles/projetCIR1_groupe_6.dir/C/main.c.s
+.PHONY : C/main.c.s
+
+C/movies.o: C/movies.c.o
+
+.PHONY : C/movies.o
+
+# target to build an object file
+C/movies.c.o:
+	$(MAKE) -f CMakeFiles/projetCIR1_groupe_6.dir/build.make CMakeFiles/projetCIR1_groupe_6.dir/C/movies.c.o
+.PHONY : C/movies.c.o
+
+C/movies.i: C/movies.c.i
+
+.PHONY : C/movies.i
+
+# target to preprocess a source file
+C/movies.c.i:
+	$(MAKE) -f CMakeFiles/projetCIR1_groupe_6.dir/build.make CMakeFiles/projetCIR1_groupe_6.dir/C/movies.c.i
+.PHONY : C/movies.c.i
+
+C/movies.s: C/movies.c.s
+
+.PHONY : C/movies.s
+
+# target to generate assembly for a file
+C/movies.c.s:
+	$(MAKE) -f CMakeFiles/projetCIR1_groupe_6.dir/build.make CMakeFiles/projetCIR1_groupe_6.dir/C/movies.c.s
+.PHONY : C/movies.c.s
+
+C/trie.o: C/trie.c.o
+
+.PHONY : C/trie.o
+
+# target to build an object file
+C/trie.c.o:
+	$(MAKE) -f CMakeFiles/projetCIR1_groupe_6.dir/build.make CMakeFiles/projetCIR1_groupe_6.dir/C/trie.c.o
+.PHONY : C/trie.c.o
+
+C/trie.i: C/trie.c.i
+
+.PHONY : C/trie.i
+
+# target to preprocess a source file
+C/trie.c.i:
+	$(MAKE) -f CMakeFiles/projetCIR1_groupe_6.dir/build.make CMakeFiles/projetCIR1_groupe_6.dir/C/trie.c.i
+.PHONY : C/trie.c.i
+
+C/trie.s: C/trie.c.s
+
+.PHONY : C/trie.s
+
+# target to generate assembly for a file
+C/trie.c.s:
+	$(MAKE) -f CMakeFiles/projetCIR1_groupe_6.dir/build.make CMakeFiles/projetCIR1_groupe_6.dir/C/trie.c.s
+.PHONY : C/trie.c.s
 
 # Help Target
 help:
@@ -186,12 +240,18 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... projetCIR1_groupe_6"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
-	@echo "... trie.o"
-	@echo "... trie.i"
-	@echo "... trie.s"
+	@echo "... C/list.o"
+	@echo "... C/list.i"
+	@echo "... C/list.s"
+	@echo "... C/main.o"
+	@echo "... C/main.i"
+	@echo "... C/main.s"
+	@echo "... C/movies.o"
+	@echo "... C/movies.i"
+	@echo "... C/movies.s"
+	@echo "... C/trie.o"
+	@echo "... C/trie.i"
+	@echo "... C/trie.s"
 .PHONY : help
 
 

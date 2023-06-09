@@ -5,5 +5,5 @@
 #include "trie.h"
 
 int main() {
-    buildTrieFromFile()
+    buildTrieFromFile();
 }

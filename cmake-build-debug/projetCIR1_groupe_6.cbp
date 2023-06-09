@@ -78,13 +78,25 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/mnt/c/Users/pierr/OneDrive/Bureau/Projet/projetCIR1_groupe_6/main.c">
+		<Unit filename="/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/C/list.c">
 			<Option target="projetCIR1_groupe_6"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/pierr/OneDrive/Bureau/Projet/projetCIR1_groupe_6/trie.c">
+		<Unit filename="/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/C/list.h">
 			<Option target="projetCIR1_groupe_6"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/pierr/OneDrive/Bureau/Projet/projetCIR1_groupe_6/trie.h">
+		<Unit filename="/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/C/main.c">
+			<Option target="projetCIR1_groupe_6"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/C/movies.c">
+			<Option target="projetCIR1_groupe_6"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/C/movies.h">
+			<Option target="projetCIR1_groupe_6"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/C/trie.c">
+			<Option target="projetCIR1_groupe_6"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/C/trie.h">
 			<Option target="projetCIR1_groupe_6"/>
 		</Unit>
 		<Unit filename="/mnt/c/Users/pierr/OneDrive/Bureau/Projet/projetCIR1_groupe_6/CMakeLists.txt">
