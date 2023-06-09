@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6
+CMAKE_SOURCE_DIR = /mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/C
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/cmake-build-debug
+CMAKE_BINARY_DIR = /mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/C/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/cmake-build-debug/CMakeFiles /mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/C/cmake-build-debug/CMakeFiles /mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/C/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/C/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -111,125 +111,125 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named projetCIR1_groupe_6
+# Target rules for targets named C
 
 # Build rule for target.
-projetCIR1_groupe_6: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 projetCIR1_groupe_6
-.PHONY : projetCIR1_groupe_6
+C : cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 C
+.PHONY : C
 
 # fast build rule for target.
-projetCIR1_groupe_6/fast:
-	$(MAKE) -f CMakeFiles/projetCIR1_groupe_6.dir/build.make CMakeFiles/projetCIR1_groupe_6.dir/build
-.PHONY : projetCIR1_groupe_6/fast
+C/fast:
+	$(MAKE) -f CMakeFiles/C.dir/build.make CMakeFiles/C.dir/build
+.PHONY : C/fast
 
-C/list.o: C/list.c.o
+list.o: list.c.o
 
-.PHONY : C/list.o
-
-# target to build an object file
-C/list.c.o:
-	$(MAKE) -f CMakeFiles/projetCIR1_groupe_6.dir/build.make CMakeFiles/projetCIR1_groupe_6.dir/C/list.c.o
-.PHONY : C/list.c.o
-
-C/list.i: C/list.c.i
-
-.PHONY : C/list.i
-
-# target to preprocess a source file
-C/list.c.i:
-	$(MAKE) -f CMakeFiles/projetCIR1_groupe_6.dir/build.make CMakeFiles/projetCIR1_groupe_6.dir/C/list.c.i
-.PHONY : C/list.c.i
-
-C/list.s: C/list.c.s
-
-.PHONY : C/list.s
-
-# target to generate assembly for a file
-C/list.c.s:
-	$(MAKE) -f CMakeFiles/projetCIR1_groupe_6.dir/build.make CMakeFiles/projetCIR1_groupe_6.dir/C/list.c.s
-.PHONY : C/list.c.s
-
-C/main.o: C/main.c.o
-
-.PHONY : C/main.o
+.PHONY : list.o
 
 # target to build an object file
-C/main.c.o:
-	$(MAKE) -f CMakeFiles/projetCIR1_groupe_6.dir/build.make CMakeFiles/projetCIR1_groupe_6.dir/C/main.c.o
-.PHONY : C/main.c.o
+list.c.o:
+	$(MAKE) -f CMakeFiles/C.dir/build.make CMakeFiles/C.dir/list.c.o
+.PHONY : list.c.o
 
-C/main.i: C/main.c.i
+list.i: list.c.i
 
-.PHONY : C/main.i
+.PHONY : list.i
 
 # target to preprocess a source file
-C/main.c.i:
-	$(MAKE) -f CMakeFiles/projetCIR1_groupe_6.dir/build.make CMakeFiles/projetCIR1_groupe_6.dir/C/main.c.i
-.PHONY : C/main.c.i
+list.c.i:
+	$(MAKE) -f CMakeFiles/C.dir/build.make CMakeFiles/C.dir/list.c.i
+.PHONY : list.c.i
 
-C/main.s: C/main.c.s
+list.s: list.c.s
 
-.PHONY : C/main.s
+.PHONY : list.s
 
 # target to generate assembly for a file
-C/main.c.s:
-	$(MAKE) -f CMakeFiles/projetCIR1_groupe_6.dir/build.make CMakeFiles/projetCIR1_groupe_6.dir/C/main.c.s
-.PHONY : C/main.c.s
+list.c.s:
+	$(MAKE) -f CMakeFiles/C.dir/build.make CMakeFiles/C.dir/list.c.s
+.PHONY : list.c.s
 
-C/movies.o: C/movies.c.o
+main.o: main.c.o
 
-.PHONY : C/movies.o
+.PHONY : main.o
 
 # target to build an object file
-C/movies.c.o:
-	$(MAKE) -f CMakeFiles/projetCIR1_groupe_6.dir/build.make CMakeFiles/projetCIR1_groupe_6.dir/C/movies.c.o
-.PHONY : C/movies.c.o
+main.c.o:
+	$(MAKE) -f CMakeFiles/C.dir/build.make CMakeFiles/C.dir/main.c.o
+.PHONY : main.c.o
 
-C/movies.i: C/movies.c.i
+main.i: main.c.i
 
-.PHONY : C/movies.i
+.PHONY : main.i
 
 # target to preprocess a source file
-C/movies.c.i:
-	$(MAKE) -f CMakeFiles/projetCIR1_groupe_6.dir/build.make CMakeFiles/projetCIR1_groupe_6.dir/C/movies.c.i
-.PHONY : C/movies.c.i
+main.c.i:
+	$(MAKE) -f CMakeFiles/C.dir/build.make CMakeFiles/C.dir/main.c.i
+.PHONY : main.c.i
 
-C/movies.s: C/movies.c.s
+main.s: main.c.s
 
-.PHONY : C/movies.s
+.PHONY : main.s
 
 # target to generate assembly for a file
-C/movies.c.s:
-	$(MAKE) -f CMakeFiles/projetCIR1_groupe_6.dir/build.make CMakeFiles/projetCIR1_groupe_6.dir/C/movies.c.s
-.PHONY : C/movies.c.s
+main.c.s:
+	$(MAKE) -f CMakeFiles/C.dir/build.make CMakeFiles/C.dir/main.c.s
+.PHONY : main.c.s
 
-C/trie.o: C/trie.c.o
+movie.o: movie.c.o
 
-.PHONY : C/trie.o
+.PHONY : movie.o
 
 # target to build an object file
-C/trie.c.o:
-	$(MAKE) -f CMakeFiles/projetCIR1_groupe_6.dir/build.make CMakeFiles/projetCIR1_groupe_6.dir/C/trie.c.o
-.PHONY : C/trie.c.o
+movie.c.o:
+	$(MAKE) -f CMakeFiles/C.dir/build.make CMakeFiles/C.dir/movie.c.o
+.PHONY : movie.c.o
 
-C/trie.i: C/trie.c.i
+movie.i: movie.c.i
 
-.PHONY : C/trie.i
+.PHONY : movie.i
 
 # target to preprocess a source file
-C/trie.c.i:
-	$(MAKE) -f CMakeFiles/projetCIR1_groupe_6.dir/build.make CMakeFiles/projetCIR1_groupe_6.dir/C/trie.c.i
-.PHONY : C/trie.c.i
+movie.c.i:
+	$(MAKE) -f CMakeFiles/C.dir/build.make CMakeFiles/C.dir/movie.c.i
+.PHONY : movie.c.i
 
-C/trie.s: C/trie.c.s
+movie.s: movie.c.s
 
-.PHONY : C/trie.s
+.PHONY : movie.s
 
 # target to generate assembly for a file
-C/trie.c.s:
-	$(MAKE) -f CMakeFiles/projetCIR1_groupe_6.dir/build.make CMakeFiles/projetCIR1_groupe_6.dir/C/trie.c.s
-.PHONY : C/trie.c.s
+movie.c.s:
+	$(MAKE) -f CMakeFiles/C.dir/build.make CMakeFiles/C.dir/movie.c.s
+.PHONY : movie.c.s
+
+trie.o: trie.c.o
+
+.PHONY : trie.o
+
+# target to build an object file
+trie.c.o:
+	$(MAKE) -f CMakeFiles/C.dir/build.make CMakeFiles/C.dir/trie.c.o
+.PHONY : trie.c.o
+
+trie.i: trie.c.i
+
+.PHONY : trie.i
+
+# target to preprocess a source file
+trie.c.i:
+	$(MAKE) -f CMakeFiles/C.dir/build.make CMakeFiles/C.dir/trie.c.i
+.PHONY : trie.c.i
+
+trie.s: trie.c.s
+
+.PHONY : trie.s
+
+# target to generate assembly for a file
+trie.c.s:
+	$(MAKE) -f CMakeFiles/C.dir/build.make CMakeFiles/C.dir/trie.c.s
+.PHONY : trie.c.s
 
 # Help Target
 help:
@@ -239,19 +239,19 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... projetCIR1_groupe_6"
-	@echo "... C/list.o"
-	@echo "... C/list.i"
-	@echo "... C/list.s"
-	@echo "... C/main.o"
-	@echo "... C/main.i"
-	@echo "... C/main.s"
-	@echo "... C/movies.o"
-	@echo "... C/movies.i"
-	@echo "... C/movies.s"
-	@echo "... C/trie.o"
-	@echo "... C/trie.i"
-	@echo "... C/trie.s"
+	@echo "... C"
+	@echo "... list.o"
+	@echo "... list.i"
+	@echo "... list.s"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
+	@echo "... movie.o"
+	@echo "... movie.i"
+	@echo "... movie.s"
+	@echo "... trie.o"
+	@echo "... trie.i"
+	@echo "... trie.s"
 .PHONY : help
 
 

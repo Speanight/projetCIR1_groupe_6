@@ -1,4 +1,4 @@
-# Install script for directory: /mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6
+# Install script for directory: /mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/C
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/C/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

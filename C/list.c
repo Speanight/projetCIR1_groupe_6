@@ -4,10 +4,10 @@
 
 #include "list.h"
 
-struct Cell* createCell(struct NodeTree* val) {
+struct Cell* createCell(struct Movie* movie) {
     struct Cell* c = malloc(sizeof(struct Cell));
     if (c != NULL) {
-        c->value = val;
+        c->movie = movie;
         c->next = NULL;
     }
     return c;
@@ -22,8 +22,8 @@ struct List* createEmptyList() {
     return l;
 }
 
-void addFirst(struct List* l, struct NodeTree* value) {
-    struct Cell* c = createCell(value);
+void addFirst(struct List* l, struct Movie* movie) {
+    struct Cell* c = createCell(movie);
     if (c != NULL) {
         c->next = l->head;
         l->head = c;
@@ -35,7 +35,7 @@ bool isListEmpty(struct List* l) {
     return l->size == 0;
 }
 
-struct NodeTree* getItemPos(struct List* l, unsigned int position, bool* valid) {
+struct Movie* getItemPos(struct List* l, unsigned int position, bool* valid) {
     unsigned int size = listSize(l);
     if (position >= size) {
         *valid = false;
@@ -45,9 +45,9 @@ struct NodeTree* getItemPos(struct List* l, unsigned int position, bool* valid) 
     for (int i = 0; i < position; i++) {
         temp = temp->next;
     }
-    struct NodeTree* value = temp->value;
+    struct Movie* movie = temp->movie;
     *valid = true;
-    return value;
+    return movie;
 }
 
 void deleteFirst(struct List* l) {
@@ -66,7 +66,7 @@ void printList(struct List* l) {
 
     unsigned int size = listSize(l);
     for (int i = 0; i < size; i++) {
-        printf("%d -> ", temp->value);
+        printf("%s -> ", temp->movie->titre);
         temp = temp->next;
     }
     printf("NULL\n");
@@ -77,7 +77,7 @@ unsigned int listSize(struct List* l) {
     return l->size;
 }
 
-void addItemPos(struct List* l, struct NodeTree* value, unsigned int position, bool* valid) {
+void addItemPos(struct List* l, struct Movie* movie, unsigned int position, bool* valid) {
     unsigned int size = listSize(l);
 
     if (position > size) {
@@ -86,14 +86,14 @@ void addItemPos(struct List* l, struct NodeTree* value, unsigned int position, b
     }
 
     if (position == 0) {
-        addFirst(l, value);
+        addFirst(l, movie);
         *valid = true;
         return;
     }
 
     struct Cell* temp = l->head;
     struct Cell* tempMax = l->head;
-    struct Cell* val = createCell(value);
+    struct Cell* val = createCell(movie);
 
     for (int i = 0; i < position; i++) {
         if (i == position-1) {
@@ -168,12 +168,12 @@ struct List* createListFromArray(int A[], unsigned int size) {
     return l;
 }
 
-struct Cell* belongs(struct List* l, int value) {
+struct Cell* belongs(struct List* l, struct Movie* movie) {
     struct Cell* temp = l->head;
     unsigned int size = l->size;
 
     for (int i = 0; i < size; i++) {
-        if (temp->value == value) {
+        if (temp->movie == movie) {
             return temp;
         }
         temp = temp->next;

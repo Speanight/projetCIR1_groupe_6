@@ -1,2 +1,0 @@
-/usr/bin/ar qc libprojetCIR1_groupe_6.a  CMakeFiles/projetCIR1_groupe_6.dir/C/trie.c.o CMakeFiles/projetCIR1_groupe_6.dir/C/main.c.o CMakeFiles/projetCIR1_groupe_6.dir/C/list.c.o CMakeFiles/projetCIR1_groupe_6.dir/C/movies.c.o
-/usr/bin/ranlib libprojetCIR1_groupe_6.a
