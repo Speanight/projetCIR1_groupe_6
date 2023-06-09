@@ -27,10 +27,10 @@ struct NodeTrie* buildTrieFromFile(char* nameFile) {
     }
 
     struct NodeTrie* trie = createEmptyNodeTrie();
-    char* realisateur;
-    char* titre;
+    char* realisateur = malloc(sizeof(char)*64);
+    char* titre = malloc(sizeof(char)*64);
     int duree;
-    char* genre;
+    char* genre = malloc(sizeof(char)*64);
 
     int i = 0;
     char* token;
