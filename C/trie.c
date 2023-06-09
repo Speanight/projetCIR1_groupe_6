@@ -27,17 +27,35 @@ struct NodeTrie* buildTrieFromFile(char* nameFile) {
     }
 
     struct NodeTrie* trie = createEmptyNodeTrie();
-    char word[MAX_REALISATEUR_SIZE];
-    int check = 0;
+    char* realisateur;
+    char* titre;
+    int duree;
+    char* genre;
 
-    while (check != EOF) {
-        fscanf(p1, "%[^\n]", word);
-        insertWord(trie, word);
-        check = fgetc(p1);
+    int i = 0;
+    char* token;
+    char line[256];
+
+    while (fgets(line, sizeof(line),p1)) {
+        token = strtok(line, ";");
+        realisateur = token;
+
+        token = strtok(NULL, ";");
+        titre = token;
+
+        token = strtok(NULL, ";");
+        duree = atoi(token);
+
+        token = strtok(NULL, ";");
+        genre = token;
+        genre[strlen(genre)-2] = 0; // Used to get rid of the \r and \n.
+
+
+        printf("%s ; %s ; %d ; %s\n", realisateur, titre, duree, genre);
     }
     fclose(p1);
 
-    return trie;
+//    return movie;
 }
 
 
@@ -54,6 +72,7 @@ struct NodeTrie* createEmptyNodeTrie() {
     }
 
     trie->isRealisateur = false;
+    trie->movies = createEmptyList();
     return trie;
 }
 

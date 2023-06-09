@@ -3,16 +3,21 @@
 
 #define ALPHABET 26
 #define MAX_REALISATEUR_SIZE 64
+#define MAX_GENRE_SIZE 24
+#define MAX_TITRE_SIZE 64
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 #include <stdbool.h>
+#include "movie.h"
+#include "list.h"
 
 struct NodeTrie {
     struct NodeTrie* children[ALPHABET];
     bool isRealisateur;
+    struct List* movies;
 };
 
 int charToInt(char c);
