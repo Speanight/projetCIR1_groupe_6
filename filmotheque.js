@@ -5,20 +5,18 @@ main();
 
 
 function disabledSearch(){
-    const realInput = document.getElementById('real');
-        const timeInput = document.getElementById('time');
-        const searchButton = document.getElementById('searchbutton');
+    let input1 = document.getElementById("real");
+    let input2 = document.getElementById("time");
+    let but = document.getElementById("searchbutton");
+    input1.addEventListener('input', toggleSearchButton);
+    input2.addEventListener('input', toggleSearchButton);
+    but.disabled = true;
 
-        // Ajoutez des écouteurs d'événements "input" pour les champs d'entrée
-        realInput.addEventListener('input', toggleSearchButton);
-        timeInput.addEventListener('input', toggleSearchButton);
-
-        // Fonction pour activer ou désactiver le bouton en fonction des champs d'entrée
-        function toggleSearchButton() {
-            if (realInput.value && timeInput.value) {
-                searchButton.disabled = false;
-            } else {
-                searchButton.disabled = true;
-            }
+    function toggleSearchButton() {
+        if (input1.value == NULL && input2.value == NULL) {
+            but.disabled = true;
+        } else {
+            but.disabled = false;
         }
+    }
 }
