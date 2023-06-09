@@ -74,14 +74,5 @@ input:focus {
     margin: 10px auto;
     padding: 2em 6em;
     position: relative;
-    text-transform: uppercase;
+        text-transform: uppercase;
 }
-#searchWithName::after {
-    height: 0;
-    left: 0;
-    top: 0;
-    width: 100%;
-  }
-  #searchWithName:hover:after {
-    height: 100%;
-  }
