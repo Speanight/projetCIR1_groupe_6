@@ -1,6 +1,9 @@
 #include "trie.h"
 
 int charToInt(char c) {
+    if (c == '-') {
+        return 26;
+    }
     return c-'a';
 }
 
@@ -12,6 +15,18 @@ bool lastLetter(struct NodeTrie* trie) {
     }
     return true;
 }
+
+char* toLower(char* str) {
+    int i = 0;
+    while (i < strlen(str)) {
+        if (str[i] <= 'Z' && str[i] >= 'A') {
+            str[i] = str[i] + 32;
+        }
+        i++;
+    }
+    return str;
+}
+
 
 bool getIsWord(struct NodeTrie* trie) {
     return trie->isRealisateur;
@@ -27,10 +42,10 @@ struct NodeTrie* buildTrieFromFile(char* nameFile) {
     }
 
     struct NodeTrie* trie = createEmptyNodeTrie();
-    char* realisateur;
-    char* titre;
+    char* realisateur = malloc(sizeof(char)*64);
+    char* titre = malloc(sizeof(char)*64);
     int duree;
-    char* genre;
+    char* genre = malloc(sizeof(char)*64);
 
     int i = 0;
     char* token;
@@ -52,7 +67,7 @@ struct NodeTrie* buildTrieFromFile(char* nameFile) {
 
         struct Movie* m = createMovie(realisateur, titre, duree, genre);
 
-        insertWord(trie, m);
+        insertMovie(trie, m);
 
 
     }
@@ -80,21 +95,10 @@ struct NodeTrie* createEmptyNodeTrie() {
     return trie;
 }
 
-char* toLower(char* str) {
-    int i = 0;
-    while (i < strlen(str)) {
-        if (str[i] <= 'Z' && str[i] >= 'A') {
-            str[i] = str[i] + 32;
-        }
-        i++;
-    }
-    return str;
-}
-
 #include <stdio.h>
 
 
-void insertWord(struct NodeTrie* trie, struct Movie* m) {
+void insertMovie(struct NodeTrie* trie, struct Movie* m) {
     int i = 0;
     char* realisateur = toLower(m->realisateur);
 
@@ -129,18 +133,20 @@ void deleteWord(struct NodeTrie* trie, char* word) {
     trie->isRealisateur = false;
 }
 
-bool findWord(struct NodeTrie* trie, char* word) {
+struct List* findMovies(struct NodeTrie* trie, char* realisateur) {
     int i = 0;
+    struct NodeTrie* temp = trie;
+    int pos = 0;
 
-    while (word[i] >= 97 && word[i] <= 123) {
-        if (trie->children[word[i]-97] == NULL) {
-            return false;
+    while (i < strlen(realisateur)) {
+        pos = charToInt(realisateur[i]);
+        if (temp->children[pos] == NULL) {
+            return NULL;
         }
-        trie = trie->children[word[i] - 97];
+        temp = temp->children[pos];
         i++;
     }
-
-    return trie->isRealisateur;
+    return temp->movies;
 }
 
 unsigned int numberOfWords(struct NodeTrie* trie) {
@@ -151,6 +157,46 @@ unsigned int numberOfWords(struct NodeTrie* trie) {
         }
     }
     return sum;
+}
+
+void exportFromRealisateurs(struct NodeTrie* trie, char* realisateur, char* textFile) {
+    struct List* l = findMovies(trie, realisateur);
+    char* line;
+    char duree[5];
+
+    FILE *p1;
+    p1 = fopen(textFile, "w");
+
+    if (listSize(l) == 0) {
+        fprintf(p1, "NULL");
+        return;
+    }
+    unsigned int size = listSize(l);
+    for (int i = 0; i < size; i++) {
+        fprintf(p1, l->head->movie->titre);
+        fprintf(p1, ";");
+        fprintf(p1, l->head->movie->realisateur);
+        fprintf(p1, ";");
+        sprintf(duree, "%d", l->head->movie->duree);
+        fprintf(p1, duree);
+
+        fprintf(p1, ";");
+        fprintf(p1, l->head->movie->genre);
+        fprintf(p1, "\n");
+
+        l->head = l->head->next;
+//        strcat(line, l->head->movie->titre);
+//        strcat(line, ";");
+//        strcat(line, l->head->movie->realisateur);
+//        strcat(line, ";");
+//        strcat(line, l->head->movie->duree);
+//        strcat(line, ";");
+//        strcat(line, l->head->movie->genre);
+//
+//        fprintf(p1, line);
+//        line = "";
+    }
+    fclose(p1);
 }
 
 void displayDict(struct NodeTrie* trie, char* actualWord, int index) {

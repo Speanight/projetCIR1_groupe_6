@@ -12,5 +12,9 @@ int main() {
     struct Movie* m = createMovie("rea", "titre", 64, "genre");
 
     struct NodeTrie* t = buildTrieFromFile("../DB/BD_small.txt");
+
+    printMovies(findMovies(t, "lee"));
+
+    exportFromRealisateurs(t, "lee", "../test.txt");
     printf("fini");
 }
