@@ -15,10 +15,12 @@ body{
 #real:invalid{
     color: red;
     visibility: visible;
+    cursor: cell;
 }
 #time:invalid{
     color: red;
     visibility: visible;
+    cursor: cell;
 }
 
 #input2{
