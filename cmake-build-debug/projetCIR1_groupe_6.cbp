@@ -8,38 +8,38 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/cmake-build-debug"/>
+				<Option working_dir="/mnt/c/Users/pierr/OneDrive/Bureau/Projet/projetCIR1_groupe_6/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j16 -f &quot;/mnt/c/Users/pierr/OneDrive/Bureau/Projet/projetCIR1_groupe_6/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/mnt/c/Users/pierr/OneDrive/Bureau/Projet/projetCIR1_groupe_6/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/mnt/c/Users/pierr/OneDrive/Bureau/Projet/projetCIR1_groupe_6/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/mnt/c/Users/pierr/OneDrive/Bureau/Projet/projetCIR1_groupe_6/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/cmake-build-debug"/>
+				<Option working_dir="/mnt/c/Users/pierr/OneDrive/Bureau/Projet/projetCIR1_groupe_6/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j16 -f &quot;/mnt/c/Users/pierr/OneDrive/Bureau/Projet/projetCIR1_groupe_6/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/mnt/c/Users/pierr/OneDrive/Bureau/Projet/projetCIR1_groupe_6/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/mnt/c/Users/pierr/OneDrive/Bureau/Projet/projetCIR1_groupe_6/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/mnt/c/Users/pierr/OneDrive/Bureau/Projet/projetCIR1_groupe_6/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/cmake-build-debug"/>
+				<Option working_dir="/mnt/c/Users/pierr/OneDrive/Bureau/Projet/projetCIR1_groupe_6/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j16 -f &quot;/mnt/c/Users/pierr/OneDrive/Bureau/Projet/projetCIR1_groupe_6/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/mnt/c/Users/pierr/OneDrive/Bureau/Projet/projetCIR1_groupe_6/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/mnt/c/Users/pierr/OneDrive/Bureau/Projet/projetCIR1_groupe_6/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/mnt/c/Users/pierr/OneDrive/Bureau/Projet/projetCIR1_groupe_6/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="projetCIR1_groupe_6">
-				<Option output="/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/cmake-build-debug/libprojetCIR1_groupe_6.a" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/cmake-build-debug"/>
+				<Option output="/mnt/c/Users/pierr/OneDrive/Bureau/Projet/projetCIR1_groupe_6/cmake-build-debug/libprojetCIR1_groupe_6.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Users/pierr/OneDrive/Bureau/Projet/projetCIR1_groupe_6/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="2"/>
 				<Option compiler="gcc"/>
@@ -51,15 +51,15 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/cmake-build-debug/Makefile&quot;  VERBOSE=1 projetCIR1_groupe_6"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j16 -f &quot;/mnt/c/Users/pierr/OneDrive/Bureau/Projet/projetCIR1_groupe_6/cmake-build-debug/Makefile&quot;  VERBOSE=1 projetCIR1_groupe_6"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/mnt/c/Users/pierr/OneDrive/Bureau/Projet/projetCIR1_groupe_6/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/mnt/c/Users/pierr/OneDrive/Bureau/Projet/projetCIR1_groupe_6/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/mnt/c/Users/pierr/OneDrive/Bureau/Projet/projetCIR1_groupe_6/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="projetCIR1_groupe_6/fast">
-				<Option output="/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/cmake-build-debug/libprojetCIR1_groupe_6.a" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/cmake-build-debug"/>
+				<Option output="/mnt/c/Users/pierr/OneDrive/Bureau/Projet/projetCIR1_groupe_6/cmake-build-debug/libprojetCIR1_groupe_6.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Users/pierr/OneDrive/Bureau/Projet/projetCIR1_groupe_6/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="2"/>
 				<Option compiler="gcc"/>
@@ -71,23 +71,23 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/cmake-build-debug/Makefile&quot;  VERBOSE=1 projetCIR1_groupe_6/fast"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j16 -f &quot;/mnt/c/Users/pierr/OneDrive/Bureau/Projet/projetCIR1_groupe_6/cmake-build-debug/Makefile&quot;  VERBOSE=1 projetCIR1_groupe_6/fast"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/mnt/c/Users/pierr/OneDrive/Bureau/Projet/projetCIR1_groupe_6/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/mnt/c/Users/pierr/OneDrive/Bureau/Projet/projetCIR1_groupe_6/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/mnt/c/Users/pierr/OneDrive/Bureau/Projet/projetCIR1_groupe_6/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/main.c">
+		<Unit filename="/mnt/c/Users/pierr/OneDrive/Bureau/Projet/projetCIR1_groupe_6/main.c">
 			<Option target="projetCIR1_groupe_6"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/trie.c">
+		<Unit filename="/mnt/c/Users/pierr/OneDrive/Bureau/Projet/projetCIR1_groupe_6/trie.c">
 			<Option target="projetCIR1_groupe_6"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/trie.h">
+		<Unit filename="/mnt/c/Users/pierr/OneDrive/Bureau/Projet/projetCIR1_groupe_6/trie.h">
 			<Option target="projetCIR1_groupe_6"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/CMakeLists.txt">
+		<Unit filename="/mnt/c/Users/pierr/OneDrive/Bureau/Projet/projetCIR1_groupe_6/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>
