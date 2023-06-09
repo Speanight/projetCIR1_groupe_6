@@ -50,11 +50,15 @@ struct NodeTrie* buildTrieFromFile(char* nameFile) {
         genre = token;
         genre[strlen(genre)-2] = 0; // Used to get rid of the \r and \n.
 
+        struct Movie* m = createMovie(realisateur, titre, duree, genre);
 
-        printf("%s ; %s ; %d ; %s\n", realisateur, titre, duree, genre);
+        insertWord(trie, m);
+
+
     }
     fclose(p1);
 
+    return trie;
 //    return movie;
 }
 
@@ -76,17 +80,40 @@ struct NodeTrie* createEmptyNodeTrie() {
     return trie;
 }
 
-void insertWord(struct NodeTrie* trie, char* word) {
+char* toLower(char* str) {
     int i = 0;
-
-    while (word[i] >= 97 && word[i] <= 123) {
-        if (trie->children[word[i] - 97] == NULL) {
-            trie->children[word[i] - 97] = createEmptyNodeTrie();
+    while (i < strlen(str)) {
+        if (str[i] <= 'Z' && str[i] >= 'A') {
+            str[i] = str[i] + 32;
         }
-        trie = trie->children[word[i] - 97];
+        i++;
+    }
+    return str;
+}
+
+#include <stdio.h>
+
+
+void insertWord(struct NodeTrie* trie, struct Movie* m) {
+    int i = 0;
+    char* realisateur = toLower(m->realisateur);
+
+    while (realisateur[i] >= 97 && realisateur[i] <= 123 || realisateur[i] == '-') {
+        int position;
+        if (realisateur[i] - 97 >= 0 && realisateur[i] - 97 <= 26) {
+            position = realisateur[i]-97;
+        }
+        else {
+            position = 26;
+        }
+        if (trie->children[position] == NULL) {
+            trie->children[position] = createEmptyNodeTrie();
+        }
+        trie = trie->children[position];
         i++;
     }
     trie->isRealisateur = true;
+    addFirst(trie->movies, m);
 }
 
 void deleteWord(struct NodeTrie* trie, char* word) {

@@ -11,6 +11,6 @@ int main() {
 
     struct Movie* m = createMovie("rea", "titre", 64, "genre");
 
-    struct Trie* t = buildTrieFromFile("../DB/BD_small.txt");
-    addFirst(l, m);
+    struct NodeTrie* t = buildTrieFromFile("../DB/BD_small.txt");
+    printf("fini");
 }
