@@ -32,3 +32,8 @@ a:hover{
 body{
   background-color: #D5D5D5;
 }
+.img-accueil{
+  color: #E1D6BA;
+  background-image: url("accueil.jpg");
+
+}
