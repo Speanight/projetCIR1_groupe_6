@@ -33,7 +33,7 @@ bool getIsWord(struct NodeTrie* trie) {
     return trie->isRealisateur;
 }
 
-struct NodeTrie* buildTrieFromFile(char* nameFile) {
+struct NodeTrie* buildTrieFromFile(char* nameFile, struct Database* db) {
     FILE* p1;
     p1 = fopen(nameFile, "r");
 
@@ -48,9 +48,9 @@ struct NodeTrie* buildTrieFromFile(char* nameFile) {
     int duree;
     char* genre = malloc(sizeof(char)*64);
 
-//    char* biggestRealisateur = malloc(sizeof(char)*64);
-//    int biggestRealisateurMovies = 0;
-//    int compareBiggestRealisateurMovies = 0;
+    char* biggestRealisateur = malloc(sizeof(char)*64);
+    int biggestRealisateurMovies = 0;
+    int compareBiggestRealisateurMovies = 0;
 
     int i = 0;
     char* token;
@@ -72,17 +72,22 @@ struct NodeTrie* buildTrieFromFile(char* nameFile) {
 
         struct Movie* m = createMovie(realisateur, titre, duree, genre);
 
-        insertMovie(trie, m);
+//        insertMovie(trie, m);
 
-//        compareBiggestRealisateurMovies = insertMovie(trie, m);
-//
-//        if (compareBiggestRealisateurMovies > biggestRealisateurMovies) {
-//            biggestRealisateurMovies = compareBiggestRealisateurMovies;
-//            biggestRealisateur = realisateur;
-//        }
+        compareBiggestRealisateurMovies = insertMovie(trie, m);
+
+        if (compareBiggestRealisateurMovies > biggestRealisateurMovies) {
+            biggestRealisateurMovies = compareBiggestRealisateurMovies;
+            strcpy(biggestRealisateur, realisateur);
+        }
 
     }
+
+    printf("%s -> %d\n", biggestRealisateur, biggestRealisateurMovies);
     fclose(p1);
+
+    db->nbFilmsDuRealisateurAvecPlusDeFilms = biggestRealisateurMovies;
+    db->realisateurAvecPlusDeFilms = biggestRealisateur;
 
     return trie;
 //    return movie;
@@ -106,7 +111,7 @@ struct NodeTrie* createEmptyNodeTrie() {
     return trie;
 }
 
-void insertMovie(struct NodeTrie* trie, struct Movie* m) {
+int insertMovie(struct NodeTrie* trie, struct Movie* m) {
     int i = 0;
     char* realisateur = toLower(m->realisateur);
 
@@ -127,7 +132,7 @@ void insertMovie(struct NodeTrie* trie, struct Movie* m) {
     trie->isRealisateur = true;
     addFirst(trie->movies, m);
 
-//    return trie->movies->size;
+    return trie->movies->size;
 }
 
 void deleteWord(struct NodeTrie* trie, char* word) {

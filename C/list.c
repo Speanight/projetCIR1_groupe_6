@@ -192,11 +192,11 @@ void reverse(struct List* l) {
 }
 
 struct List* addFromList(struct List* result, struct List* toAdd) {
-    struct List* temp = toAdd;
+    struct Cell* tempCell = toAdd->head;
 
-    while (!isListEmpty(temp)) {
-        addFirst(result, temp->head->movie);
-        deleteFirst(temp);
+    while (tempCell != NULL) {
+        addFirst(result, tempCell->movie);
+        tempCell = tempCell->next;
     }
 
     return result;

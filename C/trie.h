@@ -13,6 +13,7 @@
 #include <stdbool.h>
 #include "movie.h"
 #include "list.h"
+#include "database.h"
 
 struct NodeTrie {
     struct NodeTrie* children[ALPHABET];
@@ -26,10 +27,10 @@ bool lastLetter(struct NodeTrie* trie);
 bool getIsWord(struct NodeTrie* trie);
 char* toLower(char* str);
 
-struct NodeTrie* buildTrieFromFile(char* nameFile);
+struct NodeTrie* buildTrieFromFile(char* nameFile, struct Database* db);
 
 struct NodeTrie* createEmptyNodeTrie();
-void insertMovie(struct NodeTrie* trie, struct Movie* m);
+int insertMovie(struct NodeTrie* trie, struct Movie* m);
 void deleteWord(struct NodeTrie* trie, char* word);
 struct NodeTrie* findMovies(struct NodeTrie* trie, char* realisateur);
 void deleteNodeTrie(struct NodeTrie** trie);     // free d'une feuille.

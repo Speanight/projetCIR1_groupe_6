@@ -118,7 +118,7 @@ void buildMoviesByDuration(struct Database* db, char* textFile) {
 
 struct Database* createDataBase(char* textFile) {
     struct Database* db = createEmptyDataBase();
-    db->triParRealisateurs = buildTrieFromFile(textFile);
+    db->triParRealisateurs = buildTrieFromFile(textFile, db);
     buildMoviesByDuration(db, textFile);
 
     return db;
