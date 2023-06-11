@@ -5,6 +5,7 @@
 #include "list.h"
 #include "trie.h"
 #include "movie.h"
+#include "database.h"
 
 int main() {
     struct List* l = createEmptyList();
@@ -13,10 +14,12 @@ int main() {
 
     struct NodeTrie* t = buildTrieFromFile("../DB/BD_small.txt");
 
-    printMovies(findMovies(t, "lee"));
+    struct Database* db = createDataBase("../DB/BD_small.txt");
 
-//    findAllMovies(t, "le", l);
-
-    exportAllFromRealisateurs(t, "l", "../test.txt");
+    exportFromDuration(db, 115, "../test.txt");
     printf("fini");
+
+    findAllMovies(db->triParRealisateurs, "", l);
+
+    return 0;
 }

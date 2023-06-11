@@ -1,4 +1,5 @@
 #include "trie.h"
+#include <stdio.h>
 
 int charToInt(char c) {
     if (c == '-') {
@@ -47,6 +48,10 @@ struct NodeTrie* buildTrieFromFile(char* nameFile) {
     int duree;
     char* genre = malloc(sizeof(char)*64);
 
+//    char* biggestRealisateur = malloc(sizeof(char)*64);
+//    int biggestRealisateurMovies = 0;
+//    int compareBiggestRealisateurMovies = 0;
+
     int i = 0;
     char* token;
     char line[256];
@@ -69,6 +74,12 @@ struct NodeTrie* buildTrieFromFile(char* nameFile) {
 
         insertMovie(trie, m);
 
+//        compareBiggestRealisateurMovies = insertMovie(trie, m);
+//
+//        if (compareBiggestRealisateurMovies > biggestRealisateurMovies) {
+//            biggestRealisateurMovies = compareBiggestRealisateurMovies;
+//            biggestRealisateur = realisateur;
+//        }
 
     }
     fclose(p1);
@@ -95,9 +106,6 @@ struct NodeTrie* createEmptyNodeTrie() {
     return trie;
 }
 
-#include <stdio.h>
-
-
 void insertMovie(struct NodeTrie* trie, struct Movie* m) {
     int i = 0;
     char* realisateur = toLower(m->realisateur);
@@ -118,6 +126,8 @@ void insertMovie(struct NodeTrie* trie, struct Movie* m) {
     }
     trie->isRealisateur = true;
     addFirst(trie->movies, m);
+
+//    return trie->movies->size;
 }
 
 void deleteWord(struct NodeTrie* trie, char* word) {
