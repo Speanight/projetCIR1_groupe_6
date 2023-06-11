@@ -32,4 +32,6 @@ struct List* createListFromArray(int A[], unsigned int size);
 struct Cell* belongs(struct List* l, struct Movie* movie);
 void reverse(struct List* l);
 
+struct List* addFromList(struct List* result, struct List* toAdd);
+
 #endif //PROJETCIR1_GROUPE_6_LIST_H

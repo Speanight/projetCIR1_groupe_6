@@ -133,7 +133,47 @@ void deleteWord(struct NodeTrie* trie, char* word) {
     trie->isRealisateur = false;
 }
 
-struct List* findMovies(struct NodeTrie* trie, char* realisateur) {
+//struct List* findMovies(struct NodeTrie* trie, char* realisateur) {
+//    int i = 0;
+//    struct NodeTrie* temp = trie;
+//    int pos = 0;
+//
+//    while (i < strlen(realisateur)) {
+//        pos = charToInt(realisateur[i]);
+//        if (temp->children[pos] == NULL) {
+//            return NULL;
+//        }
+//        temp = temp->children[pos];
+//        i++;
+//    }
+//    return temp->movies;
+//}
+
+struct List* findAllMovies(struct NodeTrie* trie, char* realisateur, struct List* result) {
+    int i = 0;
+    struct NodeTrie* temp = trie;
+    int pos = 0;
+
+    while (i < strlen(realisateur)) {
+        pos = charToInt(realisateur[i]);
+        if (temp->children[pos] == NULL) {
+            return result;
+        }
+        temp = temp->children[pos];
+        i++;
+    }
+    if (temp->isRealisateur) {
+        result = addFromList(result, temp->movies);
+    }
+    for (int j = 0; j < ALPHABET; j++) {
+        if (temp->children[j] != NULL) {
+            findAllMovies(temp->children[j], "", result);
+        }
+    }
+    return result;
+}
+
+struct NodeTrie* findMovies(struct NodeTrie* trie, char* realisateur) {
     int i = 0;
     struct NodeTrie* temp = trie;
     int pos = 0;
@@ -146,7 +186,7 @@ struct List* findMovies(struct NodeTrie* trie, char* realisateur) {
         temp = temp->children[pos];
         i++;
     }
-    return temp->movies;
+    return temp;
 }
 
 unsigned int numberOfWords(struct NodeTrie* trie) {
@@ -159,18 +199,15 @@ unsigned int numberOfWords(struct NodeTrie* trie) {
     return sum;
 }
 
-void exportFromRealisateurs(struct NodeTrie* trie, char* realisateur, char* textFile) {
-    struct List* l = findMovies(trie, realisateur);
+void exportAllFromRealisateurs(struct NodeTrie* trie, char* realisateur, char* textFile) {
+    struct List* l = createEmptyList();
+   findAllMovies(trie, realisateur, l);
     char* line;
     char duree[5];
 
     FILE *p1;
     p1 = fopen(textFile, "w");
 
-    if (listSize(l) == 0) {
-        fprintf(p1, "NULL");
-        return;
-    }
     unsigned int size = listSize(l);
     for (int i = 0; i < size; i++) {
         fprintf(p1, l->head->movie->titre);
@@ -179,22 +216,69 @@ void exportFromRealisateurs(struct NodeTrie* trie, char* realisateur, char* text
         fprintf(p1, ";");
         sprintf(duree, "%d", l->head->movie->duree);
         fprintf(p1, duree);
-
         fprintf(p1, ";");
         fprintf(p1, l->head->movie->genre);
         fprintf(p1, "\n");
 
         l->head = l->head->next;
-//        strcat(line, l->head->movie->titre);
-//        strcat(line, ";");
-//        strcat(line, l->head->movie->realisateur);
-//        strcat(line, ";");
-//        strcat(line, l->head->movie->duree);
-//        strcat(line, ";");
-//        strcat(line, l->head->movie->genre);
-//
-//        fprintf(p1, line);
-//        line = "";
+    }
+
+    fclose(p1);
+}
+
+void exportFromRealisateurs(struct NodeTrie* trie, char* realisateur, char* textFile) {
+    struct NodeTrie* t = findMovies(trie, realisateur);
+    char* line;
+    char duree[5];
+
+    FILE *p1;
+    p1 = fopen(textFile, "w");
+
+    unsigned int size = listSize(t->movies);
+    for (int i = 0; i < size; i++) {
+        fprintf(p1, t->movies->head->movie->titre);
+        fprintf(p1, ";");
+        fprintf(p1, t->movies->head->movie->realisateur);
+        fprintf(p1, ";");
+        sprintf(duree, "%d", t->movies->head->movie->duree);
+        fprintf(p1, duree);
+
+        fprintf(p1, ";");
+        fprintf(p1, t->movies->head->movie->genre);
+        fprintf(p1, "\n");
+
+        t->movies->head = t->movies->head->next;
+    }
+
+    struct NodeTrie* temp;
+    for (int i = 0; i < ALPHABET; i++) {
+        if (t->children[i] != NULL) {
+            temp = t->children[i];
+
+            while (!temp->isRealisateur) {
+                for (int j = 0; j < ALPHABET; j++) {
+                    if (temp->children[i] != NULL) {
+                        temp = temp->children[i];
+                    }
+                }
+            }
+
+            unsigned int tempSize = listSize(temp->movies);
+            for (int i = 0; i < tempSize; i++) {
+                fprintf(p1, temp->movies->head->movie->titre);
+                fprintf(p1, ";");
+                fprintf(p1, temp->movies->head->movie->realisateur);
+                fprintf(p1, ";");
+                sprintf(duree, "%d", temp->movies->head->movie->duree);
+                fprintf(p1, duree);
+
+                fprintf(p1, ";");
+                fprintf(p1, temp->movies->head->movie->genre);
+                fprintf(p1, "\n");
+
+                temp->movies->head = temp->movies->head->next;
+            }
+        }
     }
     fclose(p1);
 }

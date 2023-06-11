@@ -15,6 +15,8 @@ int main() {
 
     printMovies(findMovies(t, "lee"));
 
-    exportFromRealisateurs(t, "lee", "../test.txt");
+//    findAllMovies(t, "le", l);
+
+    exportAllFromRealisateurs(t, "l", "../test.txt");
     printf("fini");
 }
