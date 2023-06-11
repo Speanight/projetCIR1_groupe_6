@@ -15,12 +15,19 @@ body{
 #real:invalid{
     color: red;
     visibility: visible;
-    cursor: cell;
 }
+
 #time:invalid{
     color: red;
     visibility: visible;
-    cursor: cell;
+}
+
+#real:valid{
+    cursor: pointer;
+}
+
+#time:valid{
+    cursor: pointer;
 }
 
 #input2{
