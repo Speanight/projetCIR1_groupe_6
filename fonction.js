@@ -21,8 +21,12 @@ function writeFile(id_form,func) {
    // text1.submit();
 }
 // -------------------------
-
-
+function getByDirector(){
+    writeFile("input1","getByDirector");
+}
+function getByTime(){
+    writeFile("input2","getByTime");
+}
 // ------- READ FILE -------
 function readFileByName(fileName){
 
