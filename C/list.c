@@ -190,3 +190,14 @@ void reverse(struct List* l) {
         deleteItemPos(l, i+1, &valid);
     }
 }
+
+struct List* addFromList(struct List* result, struct List* toAdd) {
+    struct Cell* tempCell = toAdd->head;
+
+    while (tempCell != NULL) {
+        addFirst(result, tempCell->movie);
+        tempCell = tempCell->next;
+    }
+
+    return result;
+}

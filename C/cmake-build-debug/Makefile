@@ -123,6 +123,33 @@ C/fast:
 	$(MAKE) -f CMakeFiles/C.dir/build.make CMakeFiles/C.dir/build
 .PHONY : C/fast
 
+database.o: database.c.o
+
+.PHONY : database.o
+
+# target to build an object file
+database.c.o:
+	$(MAKE) -f CMakeFiles/C.dir/build.make CMakeFiles/C.dir/database.c.o
+.PHONY : database.c.o
+
+database.i: database.c.i
+
+.PHONY : database.i
+
+# target to preprocess a source file
+database.c.i:
+	$(MAKE) -f CMakeFiles/C.dir/build.make CMakeFiles/C.dir/database.c.i
+.PHONY : database.c.i
+
+database.s: database.c.s
+
+.PHONY : database.s
+
+# target to generate assembly for a file
+database.c.s:
+	$(MAKE) -f CMakeFiles/C.dir/build.make CMakeFiles/C.dir/database.c.s
+.PHONY : database.c.s
+
 list.o: list.c.o
 
 .PHONY : list.o
@@ -240,6 +267,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... C"
+	@echo "... database.o"
+	@echo "... database.i"
+	@echo "... database.s"
 	@echo "... list.o"
 	@echo "... list.i"
 	@echo "... list.s"

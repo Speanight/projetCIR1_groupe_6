@@ -5,16 +5,26 @@
 #include "list.h"
 #include "trie.h"
 #include "movie.h"
+#include "database.h"
+#include "dictionary.h"
 
 int main() {
     struct List* l = createEmptyList();
 
-    struct Movie* m = createMovie("rea", "titre", 64, "genre");
+//    struct Movie* m = createMovie("rea", "titre", 64, "genre");
 
-    struct NodeTrie* t = buildTrieFromFile("../DB/BD_small.txt");
+//    struct NodeTrie* t = buildTrieFromFile("../DB/BD_small-maisEnMieux.txt");
 
-    printMovies(findMovies(t, "lee"));
+    struct Database* db = createDataBase("../DB/BD_small.txt");
 
-    exportFromRealisateurs(t, "lee", "../test.txt");
-    printf("fini");
+    exportFromDuration(db, 115, "../test.txt");
+
+//    struct Dictionary* d = createEmptyDictionary();
+//    updateDictionary("../DB/BD_small.txt", d);
+
+    findAllMovies(db->triParRealisateurs, "lee", l);
+
+    exportAllFromRealisateurs(db->triParRealisateurs, "lee", "../test.txt");
+
+    return 0;
 }
