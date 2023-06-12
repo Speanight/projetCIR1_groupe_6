@@ -11,24 +11,10 @@
 #include <unistd.h>
 
 int main() {
-//    Importation time.h pour calculer le temps d'execution de nos fonctions
 
-//    float timeSpent = 0.0; //On initialise le temps d'execution à 0
-    clock_t begin = clock(); //On commence à compter le temps d'execution
+    struct Database* db = buildDataBase("../DB/BD_small.txt");
 
-
-
-
-//    struct List* l = createEmptyList();
-//    struct Movie* m = createMovie("rea", "titre", 64, "genre");
-//    struct NodeTrie* t = buildTrieFromFile("../DB/BD_small.txt");
-
-    struct Database* db = buildDataBase("../DB/BD_big.txt");
-
-    bool endServer = false;
-
-//    exportFromDuration(db, 115, "../test.txt");
-//    exportFromDuration(db, 115, "../test.txt");
+    bool endServer = true;
 
     FILE* ready;
     FILE* request;
@@ -54,11 +40,7 @@ int main() {
                 argumentStr = strtok(NULL, ";");
                 printf("Argument : %s\n", argumentStr);
                 if (argumentStr != NULL) {
-
-                    clock_t begin = clock(); //On commence à compter le temps d'execution
                     exportAllFromRealisateurs(db->triParRealisateurs, argumentStr, "../../result.txt");
-                    clock_t difference = clock() - begin;
-                    printf("Temps en ms : %d\n", difference);
                 }
             }
             else {
@@ -74,15 +56,49 @@ int main() {
                         printf("argumentInt = %d\n", argumentInt);
                         exportFromDuration(db, argumentInt, "../../result.txt");
                     }
+                    else {
+                        compare = strcmp(command, "realisateurPlusDeFilms");
+                        if (compare == 0) {
+                            printf("export realisateur avec le plus de films !\n");
+                            exportMostMovies(db, "../../result.txt");
+                        }
+                        else {
+                            compare = strcmp(command, "exportWholeDB");
+                            if (compare == 0) {
+                                printf("export de toute la database !\n");
+                                exportWholeDB(db, "../../result.txt");
+                                printf("done\n");
+                            }
+                            else {
+                                compare = strcmp(command, "exportFromInterval");
+                                if (compare == 0) {
+                                    printf("export from interval!\n");
+                                    argumentInt = atoi(strtok(NULL, ";"));
+                                    int argumentInt2 = atoi(strtok(NULL, ";"));
+                                    exportFromInterval(db, argumentInt, argumentInt2, "../../result.txt");
+                                }
+                                else {
+                                    compare = strcmp(command, "addMovie");
+                                    if (compare == 0) {
+                                        printf("add a movie!\n");
+                                        char* titre = strtok(NULL, ";");
+                                        char* realisateur = strtok(NULL, ";");
+                                        int duree = atoi(strtok(NULL, ";"));
+                                        char* genre = strtok(NULL, ";");
+                                        char* addDB = strtok(NULL, ";");
+                                        addMovie(db, titre, realisateur, duree, genre, addDB);
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
             fclose(request);
             ready = fopen("../../ready.txt", "w");
-            printf("Created ready!\n");
             fclose(ready);
             sleep(1);
             remove("../../ready.txt");
-            printf("Removed ready!\n");
         }
     }
 

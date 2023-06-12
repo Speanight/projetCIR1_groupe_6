@@ -39,10 +39,10 @@ void buildMoviesByDuration(struct Database* db, char* textFile) {
         list[i] = createEmptyList();
     }
 
-    char* realisateur = malloc(sizeof(char)*64);
-    char* titre = malloc(sizeof(char)*64);
+    char* realisateur;
+    char* titre;
     int duree;
-    char* genre = malloc(sizeof(char)*64);
+    char* genre;
 
     int i = 0;
     char* token;
@@ -134,25 +134,26 @@ struct Database* buildDataBase(char* textFile) {
     }
 
 
-    struct Database* db = createEmptyDataBase();
+    struct Database* db = malloc(sizeof(struct Database));
+
+    db->dbTxt = textFile;
 
     struct List* list [DUREE_MAX];
     for (int i = 0; i < DUREE_MAX; i++) {
-        list[i] = malloc(sizeof(struct List));
+//        list[i] = malloc(sizeof(struct List));
         list[i] = createEmptyList();
     }
 
     struct NodeTrie* trie = createEmptyNodeTrie();
-    char* realisateur = malloc(sizeof(char)*64);
-    char* titre = malloc(sizeof(char)*64);
+    char* realisateur;
+    char* titre;
     int duree;
-    char* genre = malloc(sizeof(char)*64);
+    char* genre;
 
     char* biggestRealisateur = malloc(sizeof(char)*64);
     int biggestRealisateurMovies = 0;
     int compareBiggestRealisateurMovies = 0;
 
-    int i = 0;
     char* token;
     char line[256];
 
@@ -173,19 +174,17 @@ struct Database* buildDataBase(char* textFile) {
         struct Movie* m = createMovie(realisateur, titre, duree, genre);
         addFirst(list[duree], m);
 
-//        insertMovie(trie, m);
-
         compareBiggestRealisateurMovies = insertMovie(trie, m);
 
         if (compareBiggestRealisateurMovies > biggestRealisateurMovies) {
             biggestRealisateurMovies = compareBiggestRealisateurMovies;
             strcpy(biggestRealisateur, realisateur);
         }
-
     }
 
     printf("%s -> %d\n", biggestRealisateur, biggestRealisateurMovies);
     fclose(p1);
+
 
     db->nbFilmsDuRealisateurAvecPlusDeFilms = biggestRealisateurMovies;
     db->realisateurAvecPlusDeFilms = biggestRealisateur;
@@ -197,6 +196,9 @@ struct Database* buildDataBase(char* textFile) {
 
     db->triParRealisateurs = trie;
 
+
+//    free(biggestRealisateur);
+
     return db;
 }
 
@@ -206,12 +208,30 @@ struct List* getMoviesByDuration(struct List** list, int duration) {
     return list[duration];
 }
 
-void exportFromDuration(struct Database* db, int duration, char* exportFile) {
+void exportMostMovies(struct Database* db, char* exportFile) {
+    FILE *p1;
+    p1 = fopen(exportFile, "w");
+    fprintf(p1, "%s", db->realisateurAvecPlusDeFilms);
+    printf("%s\n", db->realisateurAvecPlusDeFilms);
+    fprintf(p1, ";");
+    fprintf(p1, "%d", db->nbFilmsDuRealisateurAvecPlusDeFilms);
+
+    fclose(p1);
+}
+
+void exportWholeDB(struct Database* db, char* exportFile) {
     FILE *p1;
     p1 = fopen(exportFile, "w");
     struct List* l = createEmptyList();
-    l = addFromList(l, db->triParDuree[duration]);
-//    struct List* l = db->triParDuree[duration];
+    struct timespec start;
+    clock_gettime(CLOCK_MONOTONIC, &start);
+    for (int i = 0; i < DUREE_MAX; i++) {
+        l = addFromList(l, db->triParDuree[i]);
+    }
+    struct timespec end;
+    clock_gettime(CLOCK_MONOTONIC, &end);
+    double time_taken = difftime(end.tv_sec, start.tv_sec) + (end.tv_nsec - start.tv_nsec) / 1e9;
+    fprintf(p1, "%fs\n", time_taken);
     unsigned int size = listSize(l);
 
     char duree[5];
@@ -233,9 +253,92 @@ void exportFromDuration(struct Database* db, int duration, char* exportFile) {
     fclose(p1);
 }
 
+void exportFromDuration(struct Database* db, int duration, char* exportFile) {
+    FILE *p1;
+    p1 = fopen(exportFile, "w");
+    struct List* l = createEmptyList();
+    struct timespec start;
+    clock_gettime(CLOCK_MONOTONIC, &start);
+    l = addFromList(l, db->triParDuree[duration]);
+    struct timespec end;
+    clock_gettime(CLOCK_MONOTONIC, &end);
+    double time_taken = difftime(end.tv_sec, start.tv_sec) + (end.tv_nsec - start.tv_nsec) / 1e9;
+//    struct List* l = db->triParDuree[duration];
+    unsigned int size = listSize(l);
+
+    char duree[5];
+
+    fprintf(p1, "%fs\n", time_taken);
+    for (int i = 0; i < size; i++) {
+        fprintf(p1, l->head->movie->titre);
+        fprintf(p1, ";");
+        fprintf(p1, l->head->movie->realisateur);
+        fprintf(p1, ";");
+        sprintf(duree, "%d", l->head->movie->duree);
+        fprintf(p1, duree);
+        fprintf(p1, ";");
+        fprintf(p1, l->head->movie->genre);
+        fprintf(p1, "\n");
+
+        l->head = l->head->next;
+    }
+
+    fclose(p1);
+}
+
+void addMovie(struct Database* db, char* titre, char* realisateur, int duree, char* genre, char* addDB) {
+    struct Movie* m = createMovie(realisateur, titre, duree, genre);
+
+    addFirst(db->triParDuree[duree], m);
+    insertMovie(db->triParRealisateurs, m);
+
+    int compare = strcmp(addDB, "Y");
+    if (compare == 0) {
+        FILE *p1;
+        p1 = fopen(db->dbTxt, "a");
+        fprintf(p1, "%s;%s;%d;%s\n", realisateur, titre, duree, genre);
+
+        fclose(p1);
+    }
+}
+
+void exportFromInterval(struct Database* db, int durationMin, int durationMax, char* exportFile) {
+    FILE *p1;
+    p1 = fopen(exportFile, "w");
+    struct List* l = createEmptyList();
+
+    for (int i = durationMin; i < durationMax+1; i++) {
+        l = addFromList(l, db->triParDuree[i]);
+    }
+    unsigned int size = listSize(l);
+    char duree[5];
+
+    for (int i = 0; i < size; i++) {
+        fprintf(p1, l->head->movie->titre);
+        fprintf(p1, ";");
+        fprintf(p1, l->head->movie->realisateur);
+        fprintf(p1, ";");
+        sprintf(duree, "%d", l->head->movie->duree);
+        fprintf(p1, duree);
+        fprintf(p1, ";");
+        fprintf(p1, l->head->movie->genre);
+        fprintf(p1, "\n");
+
+        l->head = l->head->next;
+    }
+
+    fclose(p1);
+}
+
 void deleteDataBase(struct Database* db) {
+    free(db->realisateurAvecPlusDeFilms);
     db->realisateurAvecPlusDeFilms = NULL;
+    db->nbFilmsDuRealisateurAvecPlusDeFilms = NULL;
     for (int i = 0; i < DUREE_MAX; i++) {
         deleteList(&db->triParDuree[i]);
     }
+
+    deleteNodeTrie(&(db->triParRealisateurs));
+
+    free(db);
 }

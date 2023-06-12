@@ -21,4 +21,6 @@ struct Movie* createEmptyMovie();
 
 struct Movie* createMovie(char* realisateur, char* titre, int duree, char* genre);
 
+void deleteMovie(struct Movie* m);
+
 #endif //PROJETCIR1_GROUPE_6_MOVIE_H

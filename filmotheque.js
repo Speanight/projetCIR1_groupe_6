@@ -44,7 +44,13 @@ function writeMovies(movies, doc) {
         doc.removeChild(doc.firstChild);
     }
 
-    for (let i = 0; i < movies.length - 2; i++) {
+    let timer = document.getElementById("timer");
+    timer.innerHTML = "Temps pris : " + movies[0];
+
+    let nbMovies = document.getElementById("nbMovies");
+    nbMovies.innerHTML = "Total de films : " + (movies.length-2);
+
+    for (let i = 1; i < movies.length - 1; i++) {
         let movieDetails = movies[i].split(";");
 
         let flexElement = document.createElement("div");
@@ -75,9 +81,10 @@ function writeMovies(movies, doc) {
         movie.appendChild(duree);
         movie.appendChild(genre);
     }
+}
 
-    
+function writeBestRealisators(text) {
+    let array = text.split(";");
 
-    let timer = document.getElementById("timer");
-    timer.innerHTML = "Temps pris : " + movies[movies.length-1];
+    alert("Le réalisateur qui a fait le plus de films est " + array[0] + " avec " + array[1] + " films.");
 }

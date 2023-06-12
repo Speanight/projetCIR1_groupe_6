@@ -92,6 +92,10 @@ struct NodeTrie* buildTrieFromFile(char* nameFile, struct Database* db) {
     db->nbFilmsDuRealisateurAvecPlusDeFilms = biggestRealisateurMovies;
     db->realisateurAvecPlusDeFilms = biggestRealisateur;
 
+    free(realisateur);
+    free(titre);
+    free(genre);
+
     return trie;
 //    return movie;
 }
@@ -135,7 +139,9 @@ int insertMovie(struct NodeTrie* trie, struct Movie* m) {
     trie->isRealisateur = true;
     addFirst(trie->movies, m);
 
-    return trie->movies->size;
+    int ret = trie->movies->size;
+
+    return ret;
 }
 
 void deleteWord(struct NodeTrie* trie, char* word) {
@@ -218,16 +224,19 @@ unsigned int numberOfWords(struct NodeTrie* trie) {
 }
 
 void exportAllFromRealisateurs(struct NodeTrie* trie, char* realisateur, char* textFile) {
-    struct timeval start, end;
-    gettimeofday(&start, NULL); //On commence à compter le temps d'execution
-    printf("START\n");
+    struct timespec start;
+    clock_gettime(CLOCK_MONOTONIC, &start);
     struct List* l = createEmptyList();
-   findAllMovies(trie, realisateur, l);
+    findAllMovies(trie, realisateur, l);
+    struct timespec end;
+    clock_gettime(CLOCK_MONOTONIC, &end);
+    double time_taken = difftime(end.tv_sec, start.tv_sec) + (end.tv_nsec - start.tv_nsec) / 1e9;
     char* line;
     char duree[5];
 
     FILE *p1;
     p1 = fopen(textFile, "w");
+    fprintf(p1, "%fs\n", time_taken);
 
     unsigned int size = listSize(l);
     for (int i = 0; i < size; i++) {
@@ -245,21 +254,6 @@ void exportAllFromRealisateurs(struct NodeTrie* trie, char* realisateur, char* t
     }
 
 
-    gettimeofday(&end, NULL);
-    printf("END");
-
-//    double time_taken = (end.tv_sec - start.tv_sec) * 1000000 + end.tv_usec - start.tv_usec;
-    double time_taken = (end.tv_sec - start.tv_sec) + 1e-6*(end.tv_usec - start.tv_usec);
-//    printf("%s\n", end.tv_sec);
-//    printf("%s\n", start.tv_sec);
-//    printf("\n%s\n", end.tv_usec);
-//    printf("%s\n", start.tv_usec);
-
-    char buff[10];
-    gcvt(time_taken, 10, buff);
-    fprintf(p1, buff);
-
-    printf("Temps pris (le vrai cette fois) : %s\n", buff);
 
     fclose(p1);
 }
@@ -341,6 +335,18 @@ void deleteNodeTrie(struct NodeTrie** trie) {
             deleteNodeTrie(&(*trie)->children[i]);
         }
     }
+
+//    if ((*trie)->isRealisateur) {
+//        deleteList(&(*trie)->movies);
+//    }
+
+    int size = listSize((*trie)->movies);
+    for (int i = 0; i < size; i++) {
+        struct Cell* c = (*trie)->movies->head;
+        (*trie)->movies->head = (*trie)->movies->head->next;
+        free(c);
+    }
+    free((*trie)->movies);
 
     free(*trie);
     *trie = NULL;

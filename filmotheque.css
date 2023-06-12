@@ -31,7 +31,8 @@ body{
     cursor: pointer;
 }
 
-#input2{
+#input2,
+#input5 {
     display: flex;
     align-items: center;
     justify-content: space-around;

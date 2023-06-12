@@ -23,7 +23,7 @@ struct Movie* createMovie(char* realisateur, char* titre, int duree, char* genre
     return m;
 }
 
-struct Movie* deleteMovie(struct Movie* m) {
+void deleteMovie(struct Movie* m) {
     free(m->titre);
     m->titre = NULL;
     free(m->realisateur);
@@ -31,7 +31,7 @@ struct Movie* deleteMovie(struct Movie* m) {
     free(m->genre);
     m->genre = NULL;
     m->duree = 0;
-    free(m);
+//    free(m);
     m = NULL;
 
     // Enlever 1 à size !

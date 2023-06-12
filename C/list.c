@@ -54,6 +54,11 @@ void deleteFirst(struct List* l) {
     struct Cell* c = l->head;
     l->head = l->head->next;
     l->size--;
+    deleteMovie(c->movie);
+//    if (c->movie != NULL) {
+//        free(c->movie);
+//    }
+    free(c->movie);
     free(c);
 }
 

@@ -38,13 +38,26 @@ function exportFromDuration(event){// fonction annexe appelée lorsqu'on appui s
     event.preventDefault();
 
     let doc = document.getElementById("moviesFlex");
-    writeFile("input2","exportFromDuration"); 
+    writeFile("input2","exportFromDuration");
     let text = readFile();
 
     let array = text.split("\n");
     writeMovies(array, doc);
     // writeFile("input2", "deleteReady");
 }
+
+function exportFromInterval(event) {
+    console.log("e");
+    event.preventDefault();
+
+    let doc = document.getElementById("moviesFlex");
+    writeFile("input5", "exportFromInterval");
+    let text = readFile();
+
+    let array = text.split("\n");
+    writeMovies(array, doc);
+}
+
 // ------- READ FILE -------
 function readFileByName(fileName){
 
@@ -91,7 +104,39 @@ function waitForDeletedFile(fileName) {
 
 
 
+function writeNewMovie(titre, realisateur, duree, genre, save, func) {
+    var element = document.createElement('a');
 
+    let textToSave = func;
+    textToSave += ";" + titre;
+    textToSave += ";" + realisateur;
+    textToSave += ";" + duree;
+    textToSave += ";" + genre;
+    textToSave += ";" + save;
+
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(textToSave));
+    element.setAttribute('download', 'request.txt');
+
+    element.style.display = 'none';
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+}
+
+function addMovie(event) {
+    event.preventDefault();
+    let titre = prompt("Entrer le titre du film que vous souhaitez ajouter");
+    let realisateur = prompt("Entrer le nom du réalisateur du film que vous souhaitez ajouter");
+    let duree = prompt("Entrer la durée du film que vous souhaitez ajouter");
+    let genre = prompt("Entrer le genre du film que vous souhaitez ajouter");
+
+    let save = prompt("Souhaitez-vous sauvegarder votre film dans la base de données ? (Y = oui, N = non)");
+
+
+    writeNewMovie(titre, realisateur, duree, genre, save, "addMovie");
+    readFile();
+    alert("Votre film a bien été ajouté à la base de données.");
+}
 
 
 
@@ -122,6 +167,21 @@ function closeServer(){
       writeFile("buttonCloseServer","endServer;")
 }
 
-function realisateurPlusDeFilms(){
+function realisateurPlusDeFilms(event){
+    event.preventDefault();
     writeFile("input3","realisateurPlusDeFilms;");
+    let text = readFile();
+
+    writeBestRealisators(text);
+}
+
+function exportWholeDB(event) {
+    event.preventDefault();
+
+    let doc = document.getElementById("moviesFlex");
+    writeFile("input4", "exportWholeDB;");
+    let text = readFile();
+
+    let array = text.split("\n");
+    writeMovies(array, doc);
 }

@@ -1,4 +1,5 @@
-#buttonCloseServer{
+#buttonCloseServer,
+#buttonAddMovie{
     display: flex;
     justify-content: center;
 }

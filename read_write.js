@@ -22,7 +22,6 @@ function writeFile(id_form,func) {
 }
 // -------------------------
 
-
 // ------- READ FILE -------
 function readFileByName(fileName){
 
