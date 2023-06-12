@@ -22,7 +22,7 @@ function disabledSearch(){
         else {
             // on met Search dans le bouton et on l'active si le on format est respecté
             but2.innerHTML = 'Search';
-            divbut2.innerHTML = '<button id="butTime" type="submit" name="search2" onclick="getByTime()">Search</button>';
+            divbut2.innerHTML = '<button id="butTime" type="submit" name="search2" onclick="exportFromDuration()">Search</button>';
         }
         
     }
@@ -35,7 +35,7 @@ function disabledSearch(){
         else{
             // on met Search dans le bouton et on l'active si le on format est respecté
             but1.innerHTML = 'Search';
-            divbut1.innerHTML = '<button id="butName" type="submit" name="search1" onclick="getByDirector()">Search</button>';
+            divbut1.innerHTML = '<button id="butName" type="submit" name="search1" onclick="exportAllFromRealisateurs()">Search</button>';
         }
     }
 }
