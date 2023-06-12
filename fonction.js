@@ -79,19 +79,6 @@ form_button = document.getElementById("go")
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 function password(){
     let pageAdmin = document.getElementById("pageAdmin") //On recupère l'id de la balise permettant d'aller à la page admin
     let mot_de_passe = 'motdepasse'; //definition du mot de passe à entrer pour accéder à la page admin
@@ -112,5 +99,9 @@ function password(){
 
 
 function closeServer(){
-      writeFile("buttonCloseServer","endServer")
+      writeFile("buttonCloseServer","endServer;")
+}
+
+function realisateurPlusDeFilms(){
+    writeFile("input3","realisateurPlusDeFilms;");
 }
