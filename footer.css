@@ -7,3 +7,12 @@ footer {
     color: white;
     text-align: center;
 }
+.logo-admin{
+    background-color: #7d171e;
+    border-radius: 50%;
+}
+.logo-admin:hover{
+    cursor : pointer;
+    scale: 1.25;
+    align-items: right;
+}

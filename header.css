@@ -17,6 +17,8 @@ li{
   border-radius: 10px;
   margin: 10px;
   margin-right: 60px;
+  
+  
 }
 a{
   text-decoration: none;
@@ -25,9 +27,6 @@ a{
 a:hover{
   color: #E1D6BA;
   scale: 1.25;
-}
-.img{
-  scale : 0.5;
 }
 body{
   background-color: #D5D5D5;
