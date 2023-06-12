@@ -21,8 +21,11 @@ function writeFile(id_form,func) {
    // text1.submit();
 }
 // -------------------------
-function exportAllFromRealisateurs(){ // fonction annexe appelée lorsqu'on appui sur le bouton
+function exportAllFromRealisateurs(event){ // fonction annexe appelée lorsqu'on appui sur le bouton
+    event.preventDefault();
+    console.log("export from realisateurs !");
     writeFile("input1","exportAllFromRealisateurs");
+    readFile();
 }
 function exportFromDuration(){// fonction annexe appelée lorsqu'on appui sur le bouton
     writeFile("input2","exportFromDuration"); 
@@ -38,12 +41,14 @@ function readFileByName(fileName){
     }while(xhr.status === 404);
 
     // assumes status 200
+    console.log(xhr.responseText);
     return xhr.responseText;
 }
 
 function readFile(){
     readFileByName("ready.txt");
-    return readFileByName("results.txt");
+    console.log("readFile");
+    return readFileByName("result.txt");
 }
 // -------------------------
 
