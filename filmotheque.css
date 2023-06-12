@@ -100,6 +100,12 @@ input:focus {
     border: solid;
     padding: 10px;
     background-color: white;
+    height: 400px;
+    width: 200px;
+}
+#movie:hover{
+    box-shadow: #73141B 0px 0px 40px 0px;
+    scale: 1.25;
 }
 
 #titre {
