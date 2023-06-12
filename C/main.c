@@ -54,6 +54,7 @@ int main() {
                 if (compare == 0) {
                     printf("export from realisateurs!\n");
                     argumentStr = strtok(NULL, ";");
+                    printf("Argument : %s\n", argumentStr);
                     if (argumentStr != NULL) {
                         exportAllFromRealisateurs(db->triParRealisateurs, argumentStr, "../../result.txt");
                     }

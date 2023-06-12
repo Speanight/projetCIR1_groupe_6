@@ -14,6 +14,8 @@ function disabledSearch(){
     input1.addEventListener('input', disabledBut1);
     input2.addEventListener('input', disabledBut2);
     
+    
+    
     function disabledBut2() {
         if (input2.checkValidity() == false) {  //Vérifie si le format est respecté
             //on remplace le bouton par un icon "interdit"
@@ -23,7 +25,8 @@ function disabledSearch(){
             // on met Search dans le bouton et on l'active si le on format est respecté
             but2.innerHTML = 'Search';
             divbut2.innerHTML = '<button id="butTime" type="submit" name="search2" onclick="exportFromDuration()">Search</button>';
-        }   
+        }
+        
     }
     
     function disabledBut1(){    
@@ -39,3 +42,43 @@ function disabledSearch(){
     }
 }
 
+function writeMovies(movies, doc) {
+    while(doc.firstChild) {
+        console.log(doc.firstChild);
+        doc.removeChild(doc.firstChild);
+    }
+
+    console.log(movies);
+
+    for (let i = 0; i < movies.length -1; i++) {
+        let movieDetails = movies[i].split(";");
+
+        let flexElement = document.createElement("div");
+        flexElement.id = "moviesFlexElement";
+        let movie = document.createElement("div");
+        movie.id = "movie";
+
+        let titre = document.createElement("p");
+        titre.id = "titre";
+        titre.innerHTML = movieDetails[0];
+        
+        let realisateur = document.createElement("p");
+        realisateur.id = "realisateur";
+        realisateur.innerHTML = movieDetails[1];
+        
+        let duree = document.createElement("p");
+        duree.id = "duree";
+        duree.innerHTML = movieDetails[2];
+        
+        let genre = document.createElement("p");
+        genre.id = "genre";
+        genre.innerHTML = movieDetails[3];
+
+        doc.appendChild(flexElement);
+        flexElement.appendChild(movie);
+        movie.appendChild(titre);
+        movie.appendChild(realisateur);
+        movie.appendChild(duree);
+        movie.appendChild(genre);
+    }
+}
