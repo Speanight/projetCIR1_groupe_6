@@ -7,8 +7,17 @@
 #include "movie.h"
 #include "database.h"
 #include "dictionary.h"
+#include <time.h>
 
 int main() {
+    //Importation time.h pour calculer le temps d'execution de nos fonctions
+
+    float timeSpent = 0.0; //On initialise le temps d'execution à 0
+    clock_t begin = clock(); //On commence à compter le temps d'execution
+
+
+
+
 //    struct List* l = createEmptyList();
 //    struct Movie* m = createMovie("rea", "titre", 64, "genre");
 //    struct NodeTrie* t = buildTrieFromFile("../DB/BD_small.txt");
@@ -67,5 +76,12 @@ int main() {
 
 //    exportAllFromRealisateurs(db->triParRealisateurs, "l", "../test.txt");
 
+
+
+
+
+    clock_t end = clock(); //Fin du temps d'execution
+    timeSpent = timeSpent + (float)(end - begin) / CLOCKS_PER_SEC; // on calcule le temps d'execution en faisant la difference entre le début et la fin de l'execution
+    // puis on divise par CLOCKS_PER_SEC pour avoir le temps en secondes
     return 0;
 }
