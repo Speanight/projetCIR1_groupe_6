@@ -97,6 +97,7 @@ input:focus {
 }
 
 #movie {
+    border: solid;
     padding: 10px;
     background-color: white;
 }
