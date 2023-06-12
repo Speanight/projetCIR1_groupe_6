@@ -32,13 +32,8 @@ function exportAllFromRealisateurs(event){ // fonction annexe appelée lorsqu'on
     let array = text.split("\n");
 
     writeMovies(array, doc);
-
-    // waitForDeletedFile("request.txt");
-
-    // writeFile("input1", "deleteReady");
-
-    // writeFile("input1", "deleteReady");
 }
+
 function exportFromDuration(event){// fonction annexe appelée lorsqu'on appui sur le bouton
     event.preventDefault();
 
