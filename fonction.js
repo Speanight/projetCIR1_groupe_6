@@ -93,11 +93,5 @@ function password(){
 }
 
 
-function closeServe(){
-    writeFile("buttonCloseServer","endServer");
-}
-
-
-
 
 
