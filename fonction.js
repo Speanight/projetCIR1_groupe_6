@@ -23,12 +23,26 @@ function writeFile(id_form,func) {
 // -------------------------
 function exportAllFromRealisateurs(event){ // fonction annexe appelée lorsqu'on appui sur le bouton
     event.preventDefault();
-    console.log("export from realisateurs !");
+
+    let doc = document.getElementById("moviesFlex");
+    // deleteChildrens(doc);
     writeFile("input1","exportAllFromRealisateurs");
-    readFile();
+    let text = readFile();
+
+    let array = text.split("\n");
+
+    writeMovies(array, doc);
 }
-function exportFromDuration(){// fonction annexe appelée lorsqu'on appui sur le bouton
+function exportFromDuration(event){// fonction annexe appelée lorsqu'on appui sur le bouton
+    event.preventDefault();
+
+    let doc = document.getElementById("moviesFlex");
+    // deleteChildrens(doc);
     writeFile("input2","exportFromDuration"); 
+    let text = readFile();
+
+    let array = text.split("\n");
+    writeMovies(array, doc);
 }
 // ------- READ FILE -------
 function readFileByName(fileName){
@@ -41,17 +55,20 @@ function readFileByName(fileName){
     }while(xhr.status === 404);
 
     // assumes status 200
-    console.log(xhr.responseText);
     return xhr.responseText;
 }
 
 function readFile(){
     readFileByName("ready.txt");
-    console.log("readFile");
     return readFileByName("result.txt");
 }
 // -------------------------
 
+function deleteChildrens(doc) {
+    while(doc.firstChild) {
+        doc.removeChild(doc.firstChild);
+    }
+}
 
 
 form_button = document.getElementById("go")
