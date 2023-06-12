@@ -8,12 +8,13 @@
 #include "database.h"
 #include "dictionary.h"
 #include <time.h>
+#include<unistd.h>
 
 int main() {
-    //Importation time.h pour calculer le temps d'execution de nos fonctions
+//    Importation time.h pour calculer le temps d'execution de nos fonctions
 
-    float timeSpent = 0.0; //On initialise le temps d'execution à 0
-    clock_t begin = clock(); //On commence à compter le temps d'execution
+//    float timeSpent = 0.0; //On initialise le temps d'execution à 0
+//    clock_t begin = clock(); //On commence à compter le temps d'execution
 
 
 
@@ -22,57 +23,69 @@ int main() {
 //    struct Movie* m = createMovie("rea", "titre", 64, "genre");
 //    struct NodeTrie* t = buildTrieFromFile("../DB/BD_small.txt");
 
-    struct Database* db = createDataBase("../DB/BD_small.txt");
+    struct Database* db = createDataBase("../DB/small.txt");
 
     bool endServer = false;
-    FILE* request;
 
 //    exportFromDuration(db, 115, "../test.txt");
 //    exportFromDuration(db, 115, "../test.txt");
+
+    FILE* ready;
+    FILE* request;
+    char line[64];
+    char* command;
+    char* argumentStr;
+    int argumentInt;
+    int compare;
+
 
     while(!endServer) {
-        char line[64];
-        char* command;
-        char* argumentStr;
-        int argumentInt;
-        int compare;
 
         request = fopen("../../request.txt", "r");
+
         if (request != NULL) {
             fgets(line, sizeof(line), request);
+            remove("../../request.txt");
             command = strtok(line, ";");
 
-            compare = strcmp(command, "exportFromDuration");
+            compare = strcmp(command, "exportAllFromRealisateurs");
             if (compare == 0) {
-                printf("export from duration!\n");
-                argumentInt = atoi(strtok(NULL, ";"));
-                printf("argumentInt = %d\n", argumentInt);
-                exportFromDuration(db, argumentInt, "../../result.txt");
+                printf("export from realisateurs!\n");
+                argumentStr = strtok(NULL, ";");
+                printf("Argument : %s\n", argumentStr);
+                if (argumentStr != NULL) {
+                    exportAllFromRealisateurs(db->triParRealisateurs, argumentStr, "../../result.txt");
+                }
             }
             else {
-                compare = strcmp(command, "exportAllFromRealisateurs");
+                compare = strcmp(command, "endServer");
                 if (compare == 0) {
-                    printf("export from realisateurs!\n");
-                    argumentStr = strtok(NULL, ";");
-                    printf("Argument : %s\n", argumentStr);
-                    if (argumentStr != NULL) {
-                        exportAllFromRealisateurs(db->triParRealisateurs, argumentStr, "../../result.txt");
-                    }
+                    endServer = true;
                 }
                 else {
-                    compare = strcmp(command, "endServer");
+                    compare = strcmp(command, "exportFromDuration");
                     if (compare == 0) {
-                        endServer = true;
+                        printf("export from duration!\n");
+                        argumentInt = atoi(strtok(NULL, ";"));
+                        printf("argumentInt = %d\n", argumentInt);
+                        exportFromDuration(db, argumentInt, "../../result.txt");
                     }
                 }
             }
             fclose(request);
-            FILE* ready;
             ready = fopen("../../ready.txt", "w");
+            printf("Created ready!\n");
             fclose(ready);
-            remove("../../request.txt");
+            sleep(1);
+            remove("../../ready.txt");
+            printf("Removed ready!\n");
         }
+
     }
+}
+
+
+
 
 //    exportFromDuration(db, 115, "../test.txt");
 
@@ -86,8 +99,8 @@ int main() {
 
 
 
-    clock_t end = clock(); //Fin du temps d'execution
-    timeSpent = timeSpent + (float)(end - begin) / CLOCKS_PER_SEC; // on calcule le temps d'execution en faisant la difference entre le début et la fin de l'execution
-    // puis on divise par CLOCKS_PER_SEC pour avoir le temps en secondes
-    return 0;
-}
+//    clock_t end = clock(); //Fin du temps d'execution
+//    timeSpent = timeSpent + (float)(end - begin) / CLOCKS_PER_SEC; // on calcule le temps d'execution en faisant la difference entre le début et la fin de l'execution
+//    // puis on divise par CLOCKS_PER_SEC pour avoir le temps en secondes
+//    return 0;
+//}
