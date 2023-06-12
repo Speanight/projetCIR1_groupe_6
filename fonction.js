@@ -122,11 +122,8 @@ function password(){
 }
 
 
-function closeServe(){
-    writeFile("buttonCloseServer","endServer");
+
+
+function closeServer(){
+      writeFile("buttonCloseServer","endServer")
 }
-
-
-
-
-
