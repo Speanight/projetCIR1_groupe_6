@@ -21,6 +21,10 @@ struct Database* createDataBase(char* textFile);
 void buildMoviesByDuration(struct Database* db, char* textFile);
 struct List* getMoviesByDuration(struct List** list, int duration);
 
+struct Database* buildDataBase(char* textFile);
+
 void exportFromDuration(struct Database* db, int duration, char* exportFile);
+
+void deleteDataBase(struct Database* db);
 
 #endif //C_DATABASE_H

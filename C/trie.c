@@ -1,5 +1,8 @@
 #include "trie.h"
 #include <stdio.h>
+#include <time.h>
+#include <unistd.h>
+#include <sys/time.h>
 
 int charToInt(char c) {
     if (c == '-') {
@@ -215,6 +218,9 @@ unsigned int numberOfWords(struct NodeTrie* trie) {
 }
 
 void exportAllFromRealisateurs(struct NodeTrie* trie, char* realisateur, char* textFile) {
+    struct timeval start, end;
+    gettimeofday(&start, NULL); //On commence à compter le temps d'execution
+    printf("START\n");
     struct List* l = createEmptyList();
    findAllMovies(trie, realisateur, l);
     char* line;
@@ -237,6 +243,23 @@ void exportAllFromRealisateurs(struct NodeTrie* trie, char* realisateur, char* t
 
         l->head = l->head->next;
     }
+
+
+    gettimeofday(&end, NULL);
+    printf("END");
+
+//    double time_taken = (end.tv_sec - start.tv_sec) * 1000000 + end.tv_usec - start.tv_usec;
+    double time_taken = (end.tv_sec - start.tv_sec) + 1e-6*(end.tv_usec - start.tv_usec);
+//    printf("%s\n", end.tv_sec);
+//    printf("%s\n", start.tv_sec);
+//    printf("\n%s\n", end.tv_usec);
+//    printf("%s\n", start.tv_usec);
+
+    char buff[10];
+    gcvt(time_taken, 10, buff);
+    fprintf(p1, buff);
+
+    printf("Temps pris (le vrai cette fois) : %s\n", buff);
 
     fclose(p1);
 }
