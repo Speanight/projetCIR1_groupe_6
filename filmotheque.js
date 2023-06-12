@@ -23,8 +23,7 @@ function disabledSearch(){
             // on met Search dans le bouton et on l'active si le on format est respecté
             but2.innerHTML = 'Search';
             divbut2.innerHTML = '<button id="butTime" type="submit" name="search2" onclick="exportFromDuration()">Search</button>';
-        }
-        
+        }   
     }
     
     function disabledBut1(){    
