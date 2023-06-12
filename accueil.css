@@ -52,3 +52,7 @@ h1{
 #txtfoot{
     font-size: 16px;
 }
+
+body{
+    padding-bottom: 30px;
+}
