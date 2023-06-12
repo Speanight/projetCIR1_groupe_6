@@ -32,17 +32,23 @@ function exportAllFromRealisateurs(event){ // fonction annexe appelée lorsqu'on
     let array = text.split("\n");
 
     writeMovies(array, doc);
+
+    // waitForDeletedFile("request.txt");
+
+    // writeFile("input1", "deleteReady");
+
+    // writeFile("input1", "deleteReady");
 }
 function exportFromDuration(event){// fonction annexe appelée lorsqu'on appui sur le bouton
     event.preventDefault();
 
     let doc = document.getElementById("moviesFlex");
-    // deleteChildrens(doc);
     writeFile("input2","exportFromDuration"); 
     let text = readFile();
 
     let array = text.split("\n");
     writeMovies(array, doc);
+    // writeFile("input2", "deleteReady");
 }
 // ------- READ FILE -------
 function readFileByName(fileName){
@@ -76,11 +82,17 @@ form_button = document.getElementById("go")
 
 
 
+// ----- TEST ------
+function waitForDeletedFile(fileName) {
+    let xhr = new XMLHttpRequest();
+    do {
+        xhr.open("GET", fileName, false);
+        xhr.send(null);
+        console.log("waiting...");
+    } while(xhr.status !== 404);
 
-
-
-
-
+    return;
+}
 
 
 
