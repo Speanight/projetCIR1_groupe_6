@@ -9,6 +9,7 @@ footer {
 }
 .logo-admin{
     background-color: #7d171e;
+    border-radius: 50%;
 }
 .logo-admin:hover{
     cursor : pointer;
