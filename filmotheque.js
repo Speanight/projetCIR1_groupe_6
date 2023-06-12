@@ -14,6 +14,8 @@ function disabledSearch(){
     input1.addEventListener('input', disabledBut1);
     input2.addEventListener('input', disabledBut2);
     
+    
+    
     function disabledBut2() {
         if (input2.checkValidity() == false) {  //Vérifie si le format est respecté
             //on remplace le bouton par un icon "interdit"
@@ -23,7 +25,8 @@ function disabledSearch(){
             // on met Search dans le bouton et on l'active si le on format est respecté
             but2.innerHTML = 'Search';
             divbut2.innerHTML = '<button id="butTime" type="submit" name="search2" onclick="exportFromDuration()">Search</button>';
-        }   
+        }
+        
     }
     
     function disabledBut1(){    
