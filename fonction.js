@@ -21,11 +21,11 @@ function writeFile(id_form,func) {
    // text1.submit();
 }
 // -------------------------
-function getByDirector(){
-    writeFile("input1","getByDirector");
+function exportAllFromRealisateurs(){ // fonction annexe appelée lorsqu'on appui sur le bouton
+    writeFile("input1","exportAllFromRealisateurs");
 }
-function getByTime(){
-    writeFile("input2","getByTime");
+function exportFromDuration(){// fonction annexe appelée lorsqu'on appui sur le bouton
+    writeFile("input2","exportFromDuration"); 
 }
 // ------- READ FILE -------
 function readFileByName(fileName){
