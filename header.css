@@ -18,6 +18,7 @@ li{
   margin: 10px;
   margin-right: 60px;
   
+  
 }
 a{
   text-decoration: none;
@@ -35,7 +36,4 @@ body{
 }
 .img-filmotheque{
   padding-top: 5px;
-}
-.admin{
-  text-align: top;
 }
