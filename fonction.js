@@ -103,7 +103,6 @@ function password(){
         }
         else{
             alert("Mot de passe incorrect");
-            return;
         }
     }
     )
