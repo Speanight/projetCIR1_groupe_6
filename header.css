@@ -17,6 +17,7 @@ li{
   border-radius: 10px;
   margin: 10px;
   margin-right: 60px;
+  
 }
 a{
   text-decoration: none;
@@ -26,9 +27,6 @@ a:hover{
   color: #E1D6BA;
   scale: 1.25;
 }
-.img{
-  scale : 0.5;
-}
 body{
   background-color: #D5D5D5;
 }
@@ -37,4 +35,7 @@ body{
 }
 .img-filmotheque{
   padding-top: 5px;
+}
+.admin{
+  text-align: top;
 }
