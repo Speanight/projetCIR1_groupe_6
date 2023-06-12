@@ -113,23 +113,5 @@ function password(){
 
 
 function closeServer(){
-      let text = "endserver";
-      let filename = "request.txt";
-      var element = document.createElement('a');
-
-      // Crée un lien de téléchargement
-      element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-      element.setAttribute('download', filename);
-
-      // Cache le lien de téléchargement
-      element.style.display = 'none';
-
-      // Ajoute le lien au corps de la page
-      document.body.appendChild(element);
-
-      // Simule un clic sur le lien pour déclencher le téléchargement
-      element.click();
-
-      // Supprime le lien de la page
-      document.body.removeChild(element);
+      writeFile("buttonCloseServer","endServer")
 }
