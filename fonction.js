@@ -110,7 +110,6 @@ function password(){
         }
         else{
             alert("Mot de passe incorrect");
-            return;
         }
     }
     )
@@ -120,5 +119,9 @@ function password(){
 
 
 function closeServer(){
-      writeFile("buttonCloseServer","endServer")
+      writeFile("buttonCloseServer","endServer;")
+}
+
+function realisateurPlusDeFilms(){
+    writeFile("input3","realisateurPlusDeFilms;");
 }

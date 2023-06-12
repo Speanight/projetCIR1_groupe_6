@@ -111,9 +111,17 @@ input:focus {
     font-size: 32px;
 }
 
+#butRealisateur{
+    height: 27px;
+    align-self: right;
+    border: none;
+    border-radius: 0px 15px 15px 0px;
+}
+
 #titre,
 #realisateur,
 #duree,
 #genre {
     text-align: center;
+
 }
