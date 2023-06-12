@@ -38,7 +38,7 @@ int main() {
                 printf("export from duration!\n");
                 argumentInt = atoi(strtok(NULL, ";"));
                 printf("argumentInt = %d\n", argumentInt);
-                exportFromDuration(db, argumentInt, "../result.txt");
+                exportFromDuration(db, argumentInt, "../../result.txt");
             }
             else {
                 compare = strcmp(command, "exportAllFromRealisateurs");
