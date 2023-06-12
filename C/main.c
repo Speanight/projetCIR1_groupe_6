@@ -45,7 +45,9 @@ int main() {
                 if (compare == 0) {
                     printf("export from realisateurs!\n");
                     argumentStr = strtok(NULL, ";");
-                    exportAllFromRealisateurs(db->triParRealisateurs, argumentStr, "../../result.txt");
+                    if (argumentStr != NULL) {
+                        exportAllFromRealisateurs(db->triParRealisateurs, argumentStr, "../../result.txt");
+                    }
                 }
                 else {
                     compare = strcmp(command, "endServer");
@@ -55,6 +57,9 @@ int main() {
                 }
             }
             fclose(request);
+            FILE* ready;
+            ready = fopen("../../ready.txt", "w");
+            fclose(ready);
             remove("../../request.txt");
         }
     }
