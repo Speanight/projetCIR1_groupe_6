@@ -41,13 +41,10 @@ function disabledSearch(){
 
 function writeMovies(movies, doc) {
     while(doc.firstChild) {
-        console.log(doc.firstChild);
         doc.removeChild(doc.firstChild);
     }
 
-    console.log(movies);
-
-    for (let i = 0; i < movies.length -1; i++) {
+    for (let i = 0; i < movies.length - 2; i++) {
         let movieDetails = movies[i].split(";");
 
         let flexElement = document.createElement("div");
@@ -65,7 +62,7 @@ function writeMovies(movies, doc) {
         
         let duree = document.createElement("p");
         duree.id = "duree";
-        duree.innerHTML = movieDetails[2];
+        duree.innerHTML = movieDetails[2] + " minutes";
         
         let genre = document.createElement("p");
         genre.id = "genre";
@@ -78,4 +75,9 @@ function writeMovies(movies, doc) {
         movie.appendChild(duree);
         movie.appendChild(genre);
     }
+
+    
+
+    let timer = document.getElementById("timer");
+    timer.innerHTML = "Temps pris : " + movies[movies.length-1];
 }
