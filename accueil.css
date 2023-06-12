@@ -40,12 +40,12 @@ h1{
     scale: 1.25;
 }
 
-footer{
+/*footer{
     color: white;
     text-decoration-color: white;
     display: flex;
     justify-content: center;
-}
+}*/
 
 #txtfoot{
     font-size: 16px;

@@ -49,4 +49,43 @@ function readFile(){
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function password(){
+    let pageAdmin = document.getElementById("pageAdmin")
+    let mot_de_passe = 'ratio';
+    pageAdmin.addEventListener("click", function(){
+        let mdp = prompt("Entrez le mot de passe pour accéder à la page admin");
+        if(mdp == mot_de_passe){
+            alert("Mot de passe correct");
+            window.location.href = "admin.html";
+        }
+        else{
+            alert("Mot de passe incorrect");
+            return;
+        }
+    }
+    )
+}
+
+
 form_button = document.getElementById("go")
