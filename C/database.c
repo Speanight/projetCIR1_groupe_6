@@ -131,7 +131,9 @@ struct List* getMoviesByDuration(struct List** list, int duration) {
 void exportFromDuration(struct Database* db, int duration, char* exportFile) {
     FILE *p1;
     p1 = fopen(exportFile, "w");
-    struct List* l = db->triParDuree[duration];
+    struct List* l = createEmptyList();
+    l = addFromList(l, db->triParDuree[duration]);
+//    struct List* l = db->triParDuree[duration];
     unsigned int size = listSize(l);
 
     char duree[5];
