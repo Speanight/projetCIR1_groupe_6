@@ -290,7 +290,16 @@ void addMovie(struct Database* db, char* titre, char* realisateur, int duree, ch
     struct Movie* m = createMovie(realisateur, titre, duree, genre);
 
     addFirst(db->triParDuree[duree], m);
-    insertMovie(db->triParRealisateurs, m);
+    int compareBiggestRealisateurMovies = insertMovie(db->triParRealisateurs, m);
+
+    if (compareBiggestRealisateurMovies > db->nbFilmsDuRealisateurAvecPlusDeFilms) {
+        db->nbFilmsDuRealisateurAvecPlusDeFilms = compareBiggestRealisateurMovies;
+        strcpy(db->realisateurAvecPlusDeFilms, realisateur);
+    }
+
+    if (addDB == NULL) {
+        return;
+    }
 
     int compare = strcmp(addDB, "Y");
     if (compare == 0) {
@@ -328,6 +337,31 @@ void exportFromInterval(struct Database* db, int durationMin, int durationMax, c
     }
 
     fclose(p1);
+}
+
+void deleteMovieFromDetails(struct Database* db, char* titre, char* realisateur, int duree, char* genre) {
+    struct List* l = db->triParDuree[duree];
+    printf("titre : %s - l->movie->titre : %s\n", titre, l->head->movie->titre);
+
+    int compare;
+    int size = l->size;
+    for (int i = 0; i < size; i++) {
+        compare = strcmp(l->head->movie->titre, titre);
+        if (compare == 0) {
+            compare = strcmp(l->head->movie->realisateur, realisateur);
+            if (compare == 0) {
+                compare = strcmp(l->head->movie->genre, genre);
+                if (compare == 0) {
+                    struct Cell *c = l->head;
+                    l->head = l->head->next;
+                    deleteMovie(c->movie);
+                    free(c);
+                    return;
+                }
+            }
+        }
+        l->head = l->head->next;
+    }
 }
 
 void deleteDataBase(struct Database* db) {

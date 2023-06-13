@@ -139,7 +139,28 @@ function addMovie(event) {
 }
 
 
+function deleteMovie(event) {
+    event.preventDefault();
 
+    let doc = document.getElementById("moviesFlex");
+    var element = document.createElement('a');
+    let textToSave = "exportWholeDB;";
+    
+
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(textToSave));
+    element.setAttribute('download', 'request.txt');
+
+    element.style.display = 'none';
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+
+    let text = readFile();
+
+    let array = text.split("\n");
+
+    writeMoviesForDelete(array, doc);
+}
 
 
 
