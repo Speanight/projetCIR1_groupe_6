@@ -104,3 +104,82 @@ function writeBestRealisators(text) {
 
     alert("Le réalisateur qui a fait le plus de films est " + array[0] + " avec " + array[1] + " films.");
 }
+
+function writeMoviesForDelete(movies, doc) {
+    while(doc.firstChild) {
+        doc.removeChild(doc.firstChild);
+    }
+
+    let timer = document.getElementById("timer");
+    timer.innerHTML = "Temps pris : " + movies[0];
+
+    let nbMovies = document.getElementById("nbMovies");
+    nbMovies.innerHTML = "Total de films : " + (movies.length-2);
+
+    for (let i = 1; i < movies.length - 1; i++) {
+        let movieDetails = movies[i].split(";");
+
+        let flexElement = document.createElement("div");
+        flexElement.id = "moviesFlexElement";
+        let movie = document.createElement("div");
+        movie.id = "movie";
+
+        let titre = document.createElement("p");
+        titre.id = "titre";
+        titre.innerHTML = movieDetails[0];
+        
+        let realisateur = document.createElement("p");
+        realisateur.id = "realisateur";
+        realisateur.innerHTML = movieDetails[1];
+        
+        let duree = document.createElement("p");
+        duree.id = "duree";
+        duree.innerHTML = movieDetails[2] + " minutes";
+        
+        let genre = document.createElement("p");
+        genre.id = "genre";
+        genre.innerHTML = movieDetails[3];
+
+        let span = document.createElement("div");
+        span.innerHTML = '\u{2717}';
+        // span.onclick = exportDeleteMovie(titre, realisateur, duree, genre);
+        span.addEventListener("click", function() {
+            let movie = this.parentNode;
+            exportDeleteMovie(movie);
+        })
+
+        doc.appendChild(movie);
+        // flexElement.appendChild(movie);
+        movie.appendChild(titre);
+        movie.appendChild(realisateur);
+        movie.appendChild(duree);
+        movie.appendChild(genre);
+        movie.appendChild(span);
+
+        let hr = document.createElement("hr");
+        doc.appendChild(hr);
+    }
+}
+
+function exportDeleteMovie (movie) {
+    console.log(movie);
+    let titre = movie.children[0].innerHTML;
+    let realisateur = movie.children[1].innerHTML;
+    let duree = movie.children[2].innerHTML;
+    duree = duree.split(" ")[0];
+    let genre = movie.children[3].innerHTML;
+    let save = "Y";
+    console.log(titre);
+    console.log(realisateur);
+    console.log(duree.split(" ")[0]);
+    console.log(genre);
+
+
+    writeNewMovie(titre, realisateur, duree, genre, save, "deleteMovie");
+    readFile();
+
+    movie.remove();
+    
+    let nb = document.getElementById("nbMovies");
+    let nbMovies = (nb.innerHTML).split(": "[2]);
+}

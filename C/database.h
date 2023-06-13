@@ -33,6 +33,8 @@ struct Database* buildDataBase(char* textFile);
 
 void exportFromDuration(struct Database* db, int duration, char* exportFile);
 
+void deleteMovieFromDetails(struct Database* db, char* titre, char* realisateur, int duree, char* genre);
+
 void deleteDataBase(struct Database* db);
 
 #endif //C_DATABASE_H

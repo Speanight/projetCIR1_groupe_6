@@ -1,5 +1,6 @@
 #buttonCloseServer,
-#buttonAddMovie{
+#buttonAddMovie,
+#buttonDelMovie{
     display: flex;
     justify-content: center;
 }
@@ -24,4 +25,24 @@
 #butName:hover{
     box-shadow: #73141B 0px 0px 40px 0px;
     scale: 1.25;
+}
+
+#moviesFlex {
+  display: flex;
+  flex-direction: column;
+}
+
+#movie {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  flex-wrap: 1;
+  justify-content: space-between;
+}
+
+#titre,
+#realisateur,
+#duree,
+#genre {
+  /* margin: 50px; */
 }

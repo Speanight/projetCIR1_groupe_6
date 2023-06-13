@@ -14,7 +14,7 @@ int main() {
 
     struct Database* db = buildDataBase("../DB/BD_small.txt");
 
-    bool endServer = true;
+    bool endServer = false;
 
     FILE* ready;
     FILE* request;
@@ -87,6 +87,17 @@ int main() {
                                         char* genre = strtok(NULL, ";");
                                         char* addDB = strtok(NULL, ";");
                                         addMovie(db, titre, realisateur, duree, genre, addDB);
+                                    }
+                                    else {
+                                        compare = strcmp(command, "deleteMovie");
+                                        if (compare == 0) {
+                                            printf("delete a movie!\n");
+                                            char* titre = strtok(NULL, ";");
+                                            char* realisateur = strtok(NULL, ";");
+                                            int duree = atoi(strtok(NULL, ";"));
+                                            char* genre = strtok(NULL, ";");
+                                            deleteMovieFromDetails(db, titre, realisateur, duree, genre);
+                                        }
                                     }
                                 }
                             }
