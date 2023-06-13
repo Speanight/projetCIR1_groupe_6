@@ -9,7 +9,6 @@ header{
   text-align: center;
   background-color: #73141B;
   padding-left: 42%;
-  flex-wrap: wrap;
 }
 li{
   list-style-type: none;

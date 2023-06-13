@@ -58,6 +58,11 @@ function exportFromInterval(event) {
     writeMovies(array, doc);
 }
 
+//--------------------------
+function rechercheliee(){
+    writeFile("input6","rechercheliee");
+}
+
 // ------- READ FILE -------
 function readFileByName(fileName){
 

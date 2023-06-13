@@ -151,3 +151,35 @@ input:focus {
     text-align: center;
 
 }
+
+.titre-lie{
+    margin: 25px;
+    text-align: center;
+}
+#recherche-liee{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+
+}
+#input6{
+    
+}
+#real2,
+#time2,
+#title2,
+#genre2{
+    border: solid 1px;
+    border-radius: 3px;
+    margin: 10px;
+}
+
+#butRecherche{
+    border-radius : 3px;
+    width: 50px;
+}
+#butRecherche:hover{
+    scale: 1.25;
+    cursor: pointer;
+}
