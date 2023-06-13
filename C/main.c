@@ -112,7 +112,6 @@ int main() {
             remove("../../ready.txt");
         }
     }
-
     deleteDataBase(db);
 }
 
