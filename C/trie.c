@@ -50,7 +50,7 @@ int insertMovie(struct NodeTrie* trie, struct Movie* m) {
     int i = 0;
     char* realisateur = toLower(m->realisateur); // We lowercase the whole name of realisateurs
 
-    while (realisateur[i] >= 97 && realisateur[i] <= 123 || realisateur[i] == '-') { // We change the position according to the name for each char.
+    while ((realisateur[i] >= 97 && realisateur[i] <= 123) || realisateur[i] == '-') { // We change the position according to the name for each char.
         int position;
         if (realisateur[i] - 97 >= 0 && realisateur[i] - 97 <= 26) { // If realisateur[i] is a letter in the alphabet...
             position = realisateur[i]-97; // The position will be the ascii code
@@ -123,7 +123,6 @@ void exportAllFromRealisateurs(struct NodeTrie* trie, char* realisateur, char* t
     struct timespec end; // We end the timer.
     clock_gettime(CLOCK_MONOTONIC, &end);
     double time_taken = difftime(end.tv_sec, start.tv_sec) + (end.tv_nsec - start.tv_nsec) / 1e9; // We calculate the difference of time between the end and the start.
-    char* line;
     char duree[5];
 
     FILE *p1;

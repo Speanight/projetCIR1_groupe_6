@@ -237,7 +237,7 @@ void exportFromInterval(struct Database* db, int durationMin, int durationMax, c
 void deleteDataBase(struct Database* db) {
     free(db->realisateurAvecPlusDeFilms); // We free the char* that used malloc.
     db->realisateurAvecPlusDeFilms = NULL; // We set it to null.
-    db->nbFilmsDuRealisateurAvecPlusDeFilms = NULL; // We set an int to null
+    db->nbFilmsDuRealisateurAvecPlusDeFilms = 0; // We set an int to 0
     for (int i = 0; i < DUREE_MAX; i++) { // We delete each list of the tri by duration.
         deleteList(&db->triParDuree[i]);
     }

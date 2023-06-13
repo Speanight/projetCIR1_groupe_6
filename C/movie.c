@@ -13,6 +13,8 @@ struct Movie* createEmptyMovie() {
         m->genre = malloc(sizeof(char)*64);
         m->titre = malloc(sizeof(char)*64);
     }
+
+    return m;
 }
 
 // Creates a movie according to the arguments

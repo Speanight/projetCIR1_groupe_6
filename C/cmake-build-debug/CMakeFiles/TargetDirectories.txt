@@ -1,3 +1,0 @@
-/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/C/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/C/cmake-build-debug/CMakeFiles/edit_cache.dir
-/mnt/c/Users/ADMIN/Documents/CoddingWorkSpace/C/projetCIR1_groupe_6/C/cmake-build-debug/CMakeFiles/C.dir

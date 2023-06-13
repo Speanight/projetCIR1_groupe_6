@@ -11,8 +11,11 @@
 
 int main() {
 
-    char* dbTxt = "../DB/BD_big.txt";
-    char* exportTxt = "";
+    // Change the following according to your preferences:
+    char* dbTxt = "../DB/BD_medium.txt"; // The database you want to open.
+    char* exportTxt = "../../htmlweb/result.txt"; // The file where the result will be sent (read by the web page, put that in the same directory folder as the html!)
+    char* readyTxt = "../../htmlweb/ready.txt"; // The file stating the result is ready (read by the web page, put that in the same directory folder as the html!)
+    char* requestTxt = "../../htmlweb/request.txt"; // The file read by the C program, having the request (read by the C program, but downloaded from the web page!)
 
     struct Database* db = buildDataBase(dbTxt); // Creation of the database
 
@@ -29,11 +32,11 @@ int main() {
 
     while(!endServer) { // Loops while we don't ask to close the server
 
-        request = fopen("../../request.txt", "r"); // We read the file request.txt
+        request = fopen(requestTxt, "r"); // We read the file request.txt
 
         if (request != NULL) { // If it exists...
             fgets(line, sizeof(line), request);
-            remove("../../request.txt");
+            remove(requestTxt);
             token = strtok(line, ";"); // We separate the command from the arguments
             command = token;
 
@@ -43,7 +46,7 @@ int main() {
                 argumentStr = strtok(NULL, ";"); // We get the following arguments with strtok
                 printf("Argument : %s\n", argumentStr);
                 if (argumentStr != NULL) {
-                    exportAllFromRealisateurs(db->triParRealisateurs, argumentStr, "../../result.txt");
+                    exportAllFromRealisateurs(db->triParRealisateurs, argumentStr, exportTxt);
                 }
             }
             else {
@@ -57,19 +60,19 @@ int main() {
                         printf("export from duration!\n");
                         argumentInt = atoi(strtok(NULL, ";"));
                         printf("argumentInt = %d\n", argumentInt);
-                        exportFromDuration(db, argumentInt, "../../result.txt");
+                        exportFromDuration(db, argumentInt, exportTxt);
                     }
                     else {
                         compare = strcmp(command, "realisateurPlusDeFilms");
                         if (compare == 0) {
                             printf("export realisateur avec le plus de films !\n");
-                            exportMostMovies(db, "../../result.txt");
+                            exportMostMovies(db, exportTxt);
                         }
                         else {
                             compare = strcmp(command, "exportWholeDB");
                             if (compare == 0) {
                                 printf("export de toute la database !\n");
-                                exportWholeDB(db, "../../result.txt");
+                                exportWholeDB(db, exportTxt);
                                 printf("done\n");
                             }
                             else {
@@ -78,7 +81,7 @@ int main() {
                                     printf("export from interval!\n");
                                     argumentInt = atoi(strtok(NULL, ";"));
                                     int argumentInt2 = atoi(strtok(NULL, ";"));
-                                    exportFromInterval(db, argumentInt, argumentInt2, "../../result.txt");
+                                    exportFromInterval(db, argumentInt, argumentInt2, exportTxt);
                                 }
                                 else {
                                     compare = strcmp(command, "addMovie");
@@ -98,11 +101,11 @@ int main() {
                 }
             }
             fclose(request); // We close the request
-            ready = fopen("../../ready.txt", "w"); // We create the file "ready.txt"
+            ready = fopen(readyTxt, "w"); // We create the file "ready.txt"
             printf("Created ready!\n");
             fclose(ready);
             sleep(1); // We add a small delay for the JS
-            remove("../../ready.txt"); // Then we remove ready and loop again
+            remove(readyTxt); // Then we remove ready and loop again
         }
     }
 
