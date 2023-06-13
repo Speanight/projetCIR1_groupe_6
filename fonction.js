@@ -139,8 +139,8 @@ function addMovie(event) {
         realisateur = prompt("Le réalisateur ne peut pas être null, merci de remplir le champ ci-dessous !");
     }
     let duree = prompt("Entrer la durée du film que vous souhaitez ajouter");
-    while (duree == "" || !(+duree) || Number.isInteger(duree)) {
-        duree = prompt("La durée ne peut pas être null et doit être égal à un nombre entier, merci de remplir le champ ci-dessous !");
+    while (duree == "" || duree != parseInt(duree)) {
+        duree = prompt("La durée ne peut pas être null et doit être égal à un nombre entier, merci de remplir le champ ci-dessous !" + duree + " " + Number.isInteger(duree));
     }
     let genre = prompt("Entrer le genre du film que vous souhaitez ajouter");
     while (genre == "") {

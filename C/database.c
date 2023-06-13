@@ -1,10 +1,6 @@
-//
-// Created by ADMIN on 6/11/2023.
-//
-
 #include "database.h"
 
-// Creates an empty Database. (obsolete kind-of)
+// Creates an empty Database. (obsolete kind-of, mainly malloc-side)
 struct Database* createEmptyDataBase() {
     struct Database* db = malloc(sizeof(struct Database));
 
@@ -25,221 +21,107 @@ struct Database* createEmptyDataBase() {
     return db;
 }
 
-// Adds all movies based on a duration.
-void buildMoviesByDuration(struct Database* db, char* textFile) {
-    FILE* p1;
-    p1 = fopen(textFile, "r");
-
-    if (p1 == NULL) {
-        printf("error in opening file.\n");
-        return;
-    }
-
-    struct List* list [DUREE_MAX];
-    for (int i = 0; i < DUREE_MAX; i++) {
-        list[i] = malloc(sizeof(struct List));
-        list[i] = createEmptyList();
-    }
-
-    char* realisateur;
-    char* titre;
-    int duree;
-    char* genre;
-
-    int i = 0;
-    char* token;
-    char line[256];
-
-    while (fgets(line, sizeof(line),p1)) {
-        token = strtok(line, ";");
-        realisateur = token;
-
-        token = strtok(NULL, ";");
-        titre = token;
-
-        token = strtok(NULL, ";");
-        duree = atoi(token);
-
-        token = strtok(NULL, ";");
-        genre = token;
-        genre[strlen(genre)-2] = 0; // Used to get rid of the \r and \n.
-
-        struct Movie* m = createMovie(realisateur, titre, duree, genre);
-        addFirst(list[duree], m);
-    }
-    fclose(p1);
-
-    for (int i = 0; i < DUREE_MAX; i++) {
-        db->triParDuree[i] = list[i];
-    }
-}
-
-//void getRealisateursWithMostMovies(struct Database* db, char* textFile) {
-//    FILE* p1;
-//    p1 = fopen(textFile, "r");
-//
-//    if (p1 == NULL) {
-//        printf("error in opening file.\n");
-//        return;
-//    }
-//
-//    struct Nodetrie* trie = createEmptyNodeTrie();
-//    char* realisateur = malloc(sizeof(char)*64);
-//    char* titre = malloc(sizeof(char)*64);
-//    int duree;
-//    char* genre = malloc(sizeof(char)*64);
-//
-//    int i = 0;
-//    char* token;
-//    char line[256];
-//
-//    while (fgets(line, sizeof(line),p1)) {
-//        token = strtok(line, ";");
-//        realisateur = token;
-//
-//        token = strtok(NULL, ";");
-//        titre = token;
-//
-//        token = strtok(NULL, ";");
-//        duree = atoi(token);
-//
-//        token = strtok(NULL, ";");
-//        genre = token;
-//        genre[strlen(genre)-2] = 0; // Used to get rid of the \r and \n.
-//
-//        struct Movie* m = createMovie(realisateur, titre, duree, genre);
-//
-//        insertMovie(trie, m);
-//
-//
-//    }
-//    fclose(p1);
-//
-//    return trie;
-//}
-
-struct Database* createDataBase(char* textFile) {
-    struct Database* db = createEmptyDataBase();
-    db->triParRealisateurs = buildTrieFromFile(textFile, db);
-    buildMoviesByDuration(db, textFile);
-
-    return db;
-}
-
+// Builds a whole database thanks to a text file. Most useful function.
 struct Database* buildDataBase(char* textFile) {
     FILE* p1;
-    p1 = fopen(textFile, "r");
+    p1 = fopen(textFile, "r"); // We open the file at the specified destination.
 
-    if (p1 == NULL) {
+    if (p1 == NULL) { // If we can't find it, we return NULL.
         printf("error in opening file.\n");
         return NULL;
     }
 
+    struct Database* db = malloc(sizeof(struct Database)); // We initialize a database...
 
-    struct Database* db = malloc(sizeof(struct Database));
+    db->dbTxt = textFile; // We specify where the database is (useful to add more movies to the DB).
 
-    db->dbTxt = textFile;
-
-    struct List* list [DUREE_MAX];
-    for (int i = 0; i < DUREE_MAX; i++) {
-//        list[i] = malloc(sizeof(struct List));
+    struct List* list [DUREE_MAX]; // We create an array of list.
+    for (int i = 0; i < DUREE_MAX; i++) { // We initialize as an empty list at each position.
         list[i] = createEmptyList();
     }
 
-    struct NodeTrie* trie = createEmptyNodeTrie();
+    struct NodeTrie* trie = createEmptyNodeTrie(); // We create an empty trie...
+    // Used for movies attributes found in the file.
     char* realisateur;
     char* titre;
     int duree;
     char* genre;
-
     char* biggestRealisateur = malloc(sizeof(char)*64);
     int biggestRealisateurMovies = 0;
     int compareBiggestRealisateurMovies = 0;
-
     char* token;
     char line[256];
 
-    while (fgets(line, sizeof(line),p1)) {
-        token = strtok(line, ";");
-        realisateur = token;
+    while (fgets(line, sizeof(line),p1)) { // While the file isn't finished, line = to each line of the file one by one.
+        token = strtok(line, ";"); // We take the first part before the ";"
+        realisateur = token; // Initialize realisateurs as it.
 
-        token = strtok(NULL, ";");
-        titre = token;
+        token = strtok(NULL, ";"); // Same for the second part
+        titre = token; // We initialize titre.
 
-        token = strtok(NULL, ";");
-        duree = atoi(token);
+        token = strtok(NULL, ";"); // Same for third part
+        duree = atoi(token); // We initialize duree, and use atoi() to convert the char* to an int.
 
-        token = strtok(NULL, ";");
-        genre = token;
-        genre[strlen(genre)-2] = 0; // Used to get rid of the \r and \n.
+        token = strtok(NULL, ";"); // Same for the fourth part.
+        genre = token; // We initialize genre.
+        genre[strlen(genre)-2] = 0; // Used to get rid of the \r and \n at the end of each line.
 
-        struct Movie* m = createMovie(realisateur, titre, duree, genre);
-        addFirst(list[duree], m);
+        struct Movie* m = createMovie(realisateur, titre, duree, genre); // We create a movie with those attributes.
+        addFirst(list[duree], m); // We add it in the list at the corresponding place thanks to the variable duree.
 
-        compareBiggestRealisateurMovies = insertMovie(trie, m);
+        compareBiggestRealisateurMovies = insertMovie(trie, m); // We insert the movie in the trie, and collect the amount of movies made by that person...
 
-        if (compareBiggestRealisateurMovies > biggestRealisateurMovies) {
-            biggestRealisateurMovies = compareBiggestRealisateurMovies;
-            strcpy(biggestRealisateur, realisateur);
+        if (compareBiggestRealisateurMovies > biggestRealisateurMovies) { // If the person we just checked made more movies than the last one kept in memory...
+            biggestRealisateurMovies = compareBiggestRealisateurMovies; // We replace it as the new "biggest amount of movies"
+            strcpy(biggestRealisateur, realisateur); // We replace the new realisateurs with the biggest amount of movies.
         }
     }
 
-    printf("%s -> %d\n", biggestRealisateur, biggestRealisateurMovies);
-    fclose(p1);
+    printf("%s -> %d\n", biggestRealisateur, biggestRealisateurMovies); // We printf it to show the biggest realisateurs in the console. Also used to know when the DB is done building.
+    fclose(p1); // We close the file.
 
 
-    db->nbFilmsDuRealisateurAvecPlusDeFilms = biggestRealisateurMovies;
+    db->nbFilmsDuRealisateurAvecPlusDeFilms = biggestRealisateurMovies; // We put the biggest realisateurs in the database.
     db->realisateurAvecPlusDeFilms = biggestRealisateur;
 
-
-    for (int i = 0; i < DUREE_MAX; i++) {
+    for (int i = 0; i < DUREE_MAX; i++) { // We put the entire list in the DB, at triParDuree.
         db->triParDuree[i] = list[i];
     }
 
-    db->triParRealisateurs = trie;
-
-
-//    free(biggestRealisateur);
-
-    return db;
+    db->triParRealisateurs = trie; // We place the trie in the DB at triParRealisateurs.
+    return db; // We return the database.
 }
 
-
-
-struct List* getMoviesByDuration(struct List** list, int duration) {
-    return list[duration];
-}
-
+// Export the realisateurs with the biggest amount of movies, as well as their number of movies.
 void exportMostMovies(struct Database* db, char* exportFile) {
     FILE *p1;
-    p1 = fopen(exportFile, "w");
-    fprintf(p1, "%s", db->realisateurAvecPlusDeFilms);
-    printf("%s\n", db->realisateurAvecPlusDeFilms);
-    fprintf(p1, ";");
-    fprintf(p1, "%d", db->nbFilmsDuRealisateurAvecPlusDeFilms);
-
-    fclose(p1);
+    p1 = fopen(exportFile, "w"); // We open the exportFile specified (or create it if it doesn't exist.).
+    fprintf(p1, "%s", db->realisateurAvecPlusDeFilms); // We add the realisateurs with the most movies to the file.
+    fprintf(p1, ";"); // We add a semicolon to separate the two values.
+    fprintf(p1, "%d", db->nbFilmsDuRealisateurAvecPlusDeFilms); // We add the amount of movies.
+    fclose(p1); // Finally, we close the file.
 }
 
+// Export the whole database to a file.
 void exportWholeDB(struct Database* db, char* exportFile) {
     FILE *p1;
-    p1 = fopen(exportFile, "w");
-    struct List* l = createEmptyList();
-    struct timespec start;
+    p1 = fopen(exportFile, "w"); // We create the file specified by exportFile
+    struct List* l = createEmptyList(); // We create an empty list
+    struct timespec start; // Start a timer
     clock_gettime(CLOCK_MONOTONIC, &start);
     for (int i = 0; i < DUREE_MAX; i++) {
-        l = addFromList(l, db->triParDuree[i]);
+        l = addFromList(l, db->triParDuree[i]); // We add each movie to the list.
     }
-    struct timespec end;
+    struct timespec end; // We stop the timer.
     clock_gettime(CLOCK_MONOTONIC, &end);
-    double time_taken = difftime(end.tv_sec, start.tv_sec) + (end.tv_nsec - start.tv_nsec) / 1e9;
-    fprintf(p1, "%fs\n", time_taken);
-    unsigned int size = listSize(l);
+    double time_taken = difftime(end.tv_sec, start.tv_sec) + (end.tv_nsec - start.tv_nsec) / 1e9; // We determine the time taken by the function.
+    fprintf(p1, "%fs\n", time_taken); // Shows the time taken in the file.
+    unsigned int size = listSize(l); // We take the size of the list.
 
     char duree[5];
 
-    for (int i = 0; i < size; i++) {
-        fprintf(p1, l->head->movie->titre);
+    for (int i = 0; i < size; i++) { // For each element (thanks to the size of the list)...
+        fprintf(p1, l->head->movie->titre); // We add each movie to the text file.
         fprintf(p1, ";");
         fprintf(p1, l->head->movie->realisateur);
         fprintf(p1, ";");
@@ -249,30 +131,29 @@ void exportWholeDB(struct Database* db, char* exportFile) {
         fprintf(p1, l->head->movie->genre);
         fprintf(p1, "\n");
 
-        l->head = l->head->next;
+        l->head = l->head->next; // Then go to the next element.
     }
-
-    fclose(p1);
+    fclose(p1); // We close the file.
 }
 
+// Export the movies with the selected duration to a file.
 void exportFromDuration(struct Database* db, int duration, char* exportFile) {
     FILE *p1;
-    p1 = fopen(exportFile, "w");
-    struct List* l = createEmptyList();
-    struct timespec start;
+    p1 = fopen(exportFile, "w"); // We open the exportFile specified (or create it if it doesn't exist.).
+    struct List* l = createEmptyList(); // We create an empty list.
+    struct timespec start; // Initialize the start of the timer.
     clock_gettime(CLOCK_MONOTONIC, &start);
-    l = addFromList(l, db->triParDuree[duration]);
-    struct timespec end;
+    l = addFromList(l, db->triParDuree[duration]); // We add each element with the good duration to the list l.
+    struct timespec end; // We stop the timer.
     clock_gettime(CLOCK_MONOTONIC, &end);
-    double time_taken = difftime(end.tv_sec, start.tv_sec) + (end.tv_nsec - start.tv_nsec) / 1e9;
-//    struct List* l = db->triParDuree[duration];
-    unsigned int size = listSize(l);
+    double time_taken = difftime(end.tv_sec, start.tv_sec) + (end.tv_nsec - start.tv_nsec) / 1e9; // Used to calculate the time taken.
+    unsigned int size = listSize(l); // We take the size of the list l.
+    fprintf(p1, "%fs\n", time_taken); // We add the time taken to the file.
 
     char duree[5];
 
-    fprintf(p1, "%fs\n", time_taken);
-    for (int i = 0; i < size; i++) {
-        fprintf(p1, l->head->movie->titre);
+    for (int i = 0; i < size; i++) { // We go through the whole list...
+        fprintf(p1, l->head->movie->titre); // And add the movie details to the file.
         fprintf(p1, ";");
         fprintf(p1, l->head->movie->realisateur);
         fprintf(p1, ";");
@@ -282,50 +163,61 @@ void exportFromDuration(struct Database* db, int duration, char* exportFile) {
         fprintf(p1, l->head->movie->genre);
         fprintf(p1, "\n");
 
-        l->head = l->head->next;
+        l->head = l->head->next; // Then, we go to the next element.
     }
 
-    fclose(p1);
+    fclose(p1); // And we close the file.
 }
 
+// Used to add a movie to the database.
 void addMovie(struct Database* db, char* titre, char* realisateur, int duree, char* genre, char* addDB) {
-    struct Movie* m = createMovie(realisateur, titre, duree, genre);
+    struct Movie* m = createMovie(realisateur, titre, duree, genre); // We create a movie with the given details...
 
-    addFirst(db->triParDuree[duree], m);
-    int compareBiggestRealisateurMovies = insertMovie(db->triParRealisateurs, m);
+    addFirst(db->triParDuree[duree], m); // We add the movie at the right place in the tri by duration.
+    int compareBiggestRealisateurMovies = insertMovie(db->triParRealisateurs, m); // We insert it to the trie (tri by realisateurs)
 
-    if (compareBiggestRealisateurMovies > db->nbFilmsDuRealisateurAvecPlusDeFilms) {
-        db->nbFilmsDuRealisateurAvecPlusDeFilms = compareBiggestRealisateurMovies;
+    if (compareBiggestRealisateurMovies > db->nbFilmsDuRealisateurAvecPlusDeFilms) { // If the new realisateur has more movies than the one kept by the data base...
+        db->nbFilmsDuRealisateurAvecPlusDeFilms = compareBiggestRealisateurMovies; // We update it in the DB.
         strcpy(db->realisateurAvecPlusDeFilms, realisateur);
     }
 
-    if (addDB == NULL) {
+    if (addDB == NULL) { // If we don't add it to the database, we just end the function here.
         return;
     }
 
-    int compare = strcmp(addDB, "Y");
+    int compare = strcmp(addDB, "Y"); // If the attributes state to add it to the database...
     if (compare == 0) {
         FILE *p1;
-        p1 = fopen(db->dbTxt, "a");
-        fprintf(p1, "%s;%s;%d;%s\n", realisateur, titre, duree, genre);
+        p1 = fopen(db->dbTxt, "a"); // We append to the file...
+        fprintf(p1, "%s;%s;%d;%s\n", realisateur, titre, duree, genre); // The new movie at the end.
 
-        fclose(p1);
+        fclose(p1); //Then we close the file.
     }
 }
 
+// Used to export from a specific interval of time.
 void exportFromInterval(struct Database* db, int durationMin, int durationMax, char* exportFile) {
     FILE *p1;
-    p1 = fopen(exportFile, "w");
-    struct List* l = createEmptyList();
+    p1 = fopen(exportFile, "w"); // We open (or create) the file specified by exportFile.
+    struct List* l = createEmptyList(); // We create an empty list.
 
-    for (int i = durationMin; i < durationMax+1; i++) {
-        l = addFromList(l, db->triParDuree[i]);
+    if (durationMin > durationMax) { // If the min is shorter than the max...
+        return; // We return without anything.
     }
-    unsigned int size = listSize(l);
+
+    if (durationMin == durationMax) { // If both the min and the max are equal...
+        exportFromDuration(db, durationMin, exportFile); // We use the function exportFromDuration.
+        return;
+}
+
+    for (int i = durationMin; i < durationMax+1; i++) { // We take each duration, from the minimum to the maximum...
+        l = addFromList(l, db->triParDuree[i]); // We add each element to a list.
+    }
+    unsigned int size = listSize(l); // We take the size of the list...
     char duree[5];
 
-    for (int i = 0; i < size; i++) {
-        fprintf(p1, l->head->movie->titre);
+    for (int i = 0; i < size; i++) { // We loop for the size of the list...
+        fprintf(p1, l->head->movie->titre); // We add each movie to the file.
         fprintf(p1, ";");
         fprintf(p1, l->head->movie->realisateur);
         fprintf(p1, ";");
@@ -335,46 +227,22 @@ void exportFromInterval(struct Database* db, int durationMin, int durationMax, c
         fprintf(p1, l->head->movie->genre);
         fprintf(p1, "\n");
 
-        l->head = l->head->next;
+        l->head = l->head->next; // We go to the next element.
     }
 
-    fclose(p1);
+    fclose(p1); // We close the file.
 }
 
-//void deleteMovieFromDetails(struct Database* db, char* titre, char* realisateur, int duree, char* genre) {
-//    struct List* l = db->triParDuree[duree];
-//    printf("titre : %s - l->movie->titre : %s\n", titre, l->head->movie->titre);
-//
-//    int compare;
-//    int size = l->size;
-//    for (int i = 0; i < size; i++) {
-//        compare = strcmp(l->head->movie->titre, titre);
-//        if (compare == 0) {
-//            compare = strcmp(l->head->movie->realisateur, realisateur);
-//            if (compare == 0) {
-//                compare = strcmp(l->head->movie->genre, genre);
-//                if (compare == 0) {
-//                    struct Cell *c = l->head;
-//                    l->head = l->head->next;
-//                    deleteMovie(c->movie);
-//                    free(c);
-//                    return;
-//                }
-//            }
-//        }
-//        l->head = l->head->next;
-//    }
-//}
-
+// Used to delete the whole database with free.
 void deleteDataBase(struct Database* db) {
-    free(db->realisateurAvecPlusDeFilms);
-    db->realisateurAvecPlusDeFilms = NULL;
-    db->nbFilmsDuRealisateurAvecPlusDeFilms = NULL;
-    for (int i = 0; i < DUREE_MAX; i++) {
+    free(db->realisateurAvecPlusDeFilms); // We free the char* that used malloc.
+    db->realisateurAvecPlusDeFilms = NULL; // We set it to null.
+    db->nbFilmsDuRealisateurAvecPlusDeFilms = NULL; // We set an int to null
+    for (int i = 0; i < DUREE_MAX; i++) { // We delete each list of the tri by duration.
         deleteList(&db->triParDuree[i]);
     }
 
-    deleteNodeTrie(&(db->triParRealisateurs));
+    deleteNodeTrie(&(db->triParRealisateurs)); // We delete the whole trie.
 
-    free(db);
+    free(db); // Finally, we free the database.
 }

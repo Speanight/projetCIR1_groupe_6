@@ -11,9 +11,12 @@
 
 int main() {
 
-    struct Database* db = buildDataBase("../DB/BD_big.txt"); // Creation of the database
+    char* dbTxt = "../DB/BD_big.txt";
+    char* exportTxt = "";
 
-    bool endServer = false;
+    struct Database* db = buildDataBase(dbTxt); // Creation of the database
+
+    bool endServer = false; // Set to true to avoid the whole loop.
     FILE* ready;
     FILE* request;
     char line[64];
@@ -22,10 +25,6 @@ int main() {
     int argumentInt;
     int compare;
     char* token;
-    char* titre;
-    char* realisateur;
-    int duree;
-    char* genre;
 
 
     while(!endServer) { // Loops while we don't ask to close the server
@@ -92,21 +91,6 @@ int main() {
                                         char* addDB = strtok(NULL, ";");
                                         addMovie(db, titre, realisateur, duree, genre, addDB);
                                     }
-//                                    else {
-//                                        compare = strcmp(command, "deleteMovie");
-//                                        if (compare == 0) {
-//                                            printf("delete a movie!\n");
-//                                            token = strtok(NULL, ";");
-//                                            titre = token;
-//                                            token = strtok(NULL, ";");
-//                                            realisateur = token;
-//                                            token = strtok(NULL, ";");
-//                                            duree = atoi(token);
-//                                            token = strtok(NULL, ";");
-//                                            genre = token;
-//                                            deleteMovieFromDetails(db, titre, realisateur, duree, genre);
-//                                        }
-//                                    }
                                 }
                             }
                         }

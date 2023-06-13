@@ -36,5 +36,5 @@ void deleteMovie(struct Movie* m) {
     m->duree = 0;
     m = NULL;
 
-    // Enlever 1 à size !
+    // Enlever 1 à size ! - Non nécessaire : delete d'un seul movie non effectué.
 }

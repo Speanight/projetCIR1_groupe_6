@@ -1,208 +1,67 @@
-//
-// Created by ADMIN on 6/9/2023.
-//
-
 #include "list.h"
 
+// Used to create a cell with a movie.
 struct Cell* createCell(struct Movie* movie) {
-    struct Cell* c = malloc(sizeof(struct Cell));
-    if (c != NULL) {
-        c->movie = movie;
-        c->next = NULL;
+    struct Cell* c = malloc(sizeof(struct Cell)); // allocating memory...
+    if (c != NULL) { // If the malloc is successful...
+        c->movie = movie; // We add the movie...
+        c->next = NULL; // And set the next one to null.
     }
-    return c;
+    return c; // We return the cell.
 }
 
+// Used to create an empty list.
 struct List* createEmptyList() {
-    struct List* l = malloc(sizeof(struct List));
-    if (l != NULL) {
-        l->size = 0;
-        l->head = NULL;
+    struct List* l = malloc(sizeof(struct List)); // Allocating memory...
+    if (l != NULL) { // If the list isn't null...
+        l->size = 0; // Its size is equal to 0
+        l->head = NULL; // And the head is null (cause the list is empty).
     }
-    return l;
+    return l; // We return the list.
 }
 
+// Used to add a movie at the beginning of the list.
 void addFirst(struct List* l, struct Movie* movie) {
-    struct Cell* c = createCell(movie);
+    struct Cell* c = createCell(movie); // We create a cell with the movie...
     if (c != NULL) {
-        c->next = l->head;
-        l->head = c;
-        l->size++;
+        c->next = l->head; // We set the next element of the cell as being the head of the list.
+        l->head = c; // We set the head of the list as being the cell.
+        l->size++; // And add one to the size.
     }
 }
 
-bool isListEmpty(struct List* l) {
-    return l->size == 0;
-}
-
-struct Movie* getItemPos(struct List* l, unsigned int position, bool* valid) {
-    unsigned int size = listSize(l);
-    if (position >= size) {
-        *valid = false;
-        return 0;
-    }
-    struct Cell* temp = l->head;
-    for (int i = 0; i < position; i++) {
-        temp = temp->next;
-    }
-    struct Movie* movie = temp->movie;
-    *valid = true;
-    return movie;
-}
-
+// Used to delete the first element.
 void deleteFirst(struct List* l) {
-    struct Cell* c = l->head;
-    l->head = l->head->next;
-    l->size--;
-    deleteMovie(c->movie);
-//    if (c->movie != NULL) {
-//        free(c->movie);
-//    }
-    free(c->movie);
-    free(c);
+    struct Cell* c = l->head; // We define a cell as being the head of the list.
+    l->head = l->head->next; // We set the head of the list as being the next element.
+    l->size--; // We remove 1 from size.
+    deleteMovie(c->movie); // We delete the movie from the cell.
+    free(c->movie); // We free the movie.
+    free(c); // We free the cell.
 }
 
-void printMovies(struct List* l) {
-    if (listSize(l) == 0) {
-        printf("NULL\n");
-        return;
-    }
-    struct Cell* temp = l->head;
-
-    unsigned int size = listSize(l);
-    for (int i = 0; i < size; i++) {
-        printf("%s;%s;%d;%s\n", temp->movie->titre, temp->movie->realisateur, temp->movie->duree, temp->movie->genre);
-        temp = temp->next;
-    }
-    printf("NULL\n");
-    free(temp);
-}
-
+// Used to determine the size of a list.
 unsigned int listSize(struct List* l) {
-    return l->size;
+    return l->size; // We return the size of the list.
 }
 
-void addItemPos(struct List* l, struct Movie* movie, unsigned int position, bool* valid) {
-    unsigned int size = listSize(l);
-
-    if (position > size) {
-        *valid = false;
-        return;
-    }
-
-    if (position == 0) {
-        addFirst(l, movie);
-        *valid = true;
-        return;
-    }
-
-    struct Cell* temp = l->head;
-    struct Cell* tempMax = l->head;
-    struct Cell* val = createCell(movie);
-
-    for (int i = 0; i < position; i++) {
-        if (i == position-1) {
-            tempMax = tempMax->next;
-            temp->next = val; // val must contain the value "value" received by the function!
-            val->next = tempMax;
-        }
-        if (temp == NULL) {
-            *valid = false;
-        }
-        else {
-            tempMax = tempMax->next; // Used to change the value of the next element.
-            temp = temp->next;
-        }
-    }
-    *valid = true;
-//    free(val);
-//    free(tempMax);
-//    free(temp);
-
-    l->size++;
-}
-
-void deleteItemPos(struct List* l, unsigned int position, bool* valid) {
-    if (l == NULL || listSize(l) == 0) {
-        *valid = false;
-        return;
-    }
-    if (position == 0) {
-        *valid = true;
-        deleteFirst(l);
-        return;
-    }
-    else {
-        struct Cell* iter = l->head;
-        struct Cell* suprCell;
-
-        for (int i = 0; i < position - 1; i++) { // go to the "position-1" cell
-            if (iter->next == NULL) { // if there's no more cell
-                *valid = false;
-                return;
-            }
-            iter = iter->next;
-        }
-        suprCell = iter->next;
-        iter->next = iter->next->next;
-        free(suprCell);
-    }
-    l->size--;
-    *valid = true;
-}
-
+// Used to delete a list.
 void deleteList(struct List** l) {
-    unsigned int count =listSize(*l);
-    for (int i = 0; i < count; i++) {
-        deleteFirst(*l);
+    unsigned int count =listSize(*l); // We obtain the size of the list.
+    for (int i = 0; i < count; i++) { // We loop to go through each element...
+        deleteFirst(*l); // We delete the first element each time.
     }
-    free(*l);
+    free(*l); // We free the list once we're done.
 }
 
-struct List* createListFromArray(int A[], unsigned int size) {
-    if (size == 0) {
-        return NULL;
-    }
-
-    struct List* l = createEmptyList();
-
-    for (int i = size; i > 0; i--) {
-        addFirst(l, A[i-1]);
-    }
-
-    return l;
-}
-
-struct Cell* belongs(struct List* l, struct Movie* movie) {
-    struct Cell* temp = l->head;
-    unsigned int size = l->size;
-
-    for (int i = 0; i < size; i++) {
-        if (temp->movie == movie) {
-            return temp;
-        }
-        temp = temp->next;
-    }
-    return NULL;
-}
-
-void reverse(struct List* l) {
-    bool valid = true;
-    int size = listSize(l);
-
-    for (int i = 0; i < size; i++) {
-        addFirst(l, getItemPos(l, i, &valid));
-        deleteItemPos(l, i+1, &valid);
-    }
-}
-
+// Used to "copy" a list to another one.
 struct List* addFromList(struct List* result, struct List* toAdd) {
-    struct Cell* tempCell = toAdd->head;
+    struct Cell* tempCell = toAdd->head; // We create a cell with the head of the list to add.
 
-    while (tempCell != NULL) {
-        addFirst(result, tempCell->movie);
-        tempCell = tempCell->next;
+    while (tempCell != NULL) { // While the temporary cell isn't null...
+        addFirst(result, tempCell->movie); // We add the first element to the result list...
+        tempCell = tempCell->next; // And go to the next element.
     }
 
-    return result;
+    return result; // The, we return the result.
 }

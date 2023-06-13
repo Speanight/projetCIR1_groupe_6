@@ -1,7 +1,3 @@
-//
-// Created by ADMIN on 6/9/2023.
-//
-
 #ifndef PROJETCIR1_GROUPE_6_MOVIE_H
 #define PROJETCIR1_GROUPE_6_MOVIE_H
 

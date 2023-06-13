@@ -1,7 +1,3 @@
-//
-// Created by ADMIN on 6/11/2023.
-//
-
 #ifndef C_DATABASE_H
 #define C_DATABASE_H
 #define DUREE_MAX 1200
@@ -19,9 +15,6 @@ struct Database {
 };
 
 struct Database* createEmptyDataBase();
-struct Database* createDataBase(char* textFile);
-void buildMoviesByDuration(struct Database* db, char* textFile);
-struct List* getMoviesByDuration(struct List** list, int duration);
 void exportMostMovies(struct Database* db, char* exportFile);
 
 void addMovie(struct Database* db, char* titre, char* realisateur, int duree, char* genre, char* addDB);
@@ -32,7 +25,6 @@ void exportFromInterval(struct Database* db, int durationMin, int durationMax, c
 struct Database* buildDataBase(char* textFile);
 
 void exportFromDuration(struct Database* db, int duration, char* exportFile);
-void deleteMovieFromDetails(struct Database* db, char* titre, char* realisateur, int duree, char* genre);
 
 void deleteDataBase(struct Database* db);
 

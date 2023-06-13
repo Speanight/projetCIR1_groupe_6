@@ -1,246 +1,138 @@
 #include "trie.h"
 #include <stdio.h>
 #include <time.h>
-#include <unistd.h>
-#include <sys/time.h>
 
+// Used to convert a char to an int (using ascii table).
 int charToInt(char c) {
-    if (c == '-') {
-        return 26;
+    if (c == '-') { // If the char is a -
+        return 26; // We return 26 (cause it's not in the alphabet, technically).
     }
-    return c-'a';
+    return c-'a'; // Else, we return c-'a'.
 }
 
-bool lastLetter(struct NodeTrie* trie) {
-    for (int i = 0; i < ALPHABET; i++) {
-        if (trie->children[i] != NULL) {
-            return false;
-        }
-    }
-    return true;
-}
-
+// Returns the lowercase char.
 char* toLower(char* str) {
     int i = 0;
-    while (i < strlen(str)) {
-        if (str[i] <= 'Z' && str[i] >= 'A') {
-            str[i] = str[i] + 32;
+    while (i < strlen(str)) { // For each char in the char*...
+        if (str[i] <= 'Z' && str[i] >= 'A') { // If the char is an uppercase letter...
+            str[i] = str[i] + 32; // We add 32 to its ascii value (to convert it to a lowercase)
         }
-        i++;
+        i++; // We add 1 to i
     }
-    return str;
+    return str; // We return the new string.
 }
 
-
+// Gives true if the trie actual is a realisateurs.
 bool getIsWord(struct NodeTrie* trie) {
     return trie->isRealisateur;
 }
 
-struct NodeTrie* buildTrieFromFile(char* nameFile, struct Database* db) {
-    FILE* p1;
-    p1 = fopen(nameFile, "r");
-
-    if (p1 == NULL) {
-        printf("error in opening file.\n");
-        return NULL;
-    }
-
-    struct NodeTrie* trie = createEmptyNodeTrie();
-    char* realisateur = malloc(sizeof(char)*64);
-    char* titre = malloc(sizeof(char)*64);
-    int duree;
-    char* genre = malloc(sizeof(char)*64);
-
-    char* biggestRealisateur = malloc(sizeof(char)*64);
-    int biggestRealisateurMovies = 0;
-    int compareBiggestRealisateurMovies = 0;
-
-    int i = 0;
-    char* token;
-    char line[256];
-
-    while (fgets(line, sizeof(line),p1)) {
-        token = strtok(line, ";");
-        realisateur = token;
-
-        token = strtok(NULL, ";");
-        titre = token;
-
-        token = strtok(NULL, ";");
-        duree = atoi(token);
-
-        token = strtok(NULL, ";");
-        genre = token;
-        genre[strlen(genre)-2] = 0; // Used to get rid of the \r and \n.
-
-        struct Movie* m = createMovie(realisateur, titre, duree, genre);
-
-//        insertMovie(trie, m);
-
-        compareBiggestRealisateurMovies = insertMovie(trie, m);
-
-        if (compareBiggestRealisateurMovies > biggestRealisateurMovies) {
-            biggestRealisateurMovies = compareBiggestRealisateurMovies;
-            strcpy(biggestRealisateur, realisateur);
-        }
-
-    }
-
-    printf("%s -> %d\n", biggestRealisateur, biggestRealisateurMovies);
-    fclose(p1);
-
-    db->nbFilmsDuRealisateurAvecPlusDeFilms = biggestRealisateurMovies;
-    db->realisateurAvecPlusDeFilms = biggestRealisateur;
-
-    free(realisateur);
-    free(titre);
-    free(genre);
-
-    return trie;
-//    return movie;
-}
-
-
+// Creates an empty Trie.
 struct NodeTrie* createEmptyNodeTrie() {
-    struct NodeTrie* trie = malloc(sizeof(struct NodeTrie));
+    struct NodeTrie* trie = malloc(sizeof(struct NodeTrie)); // We use malloc to initialize it.
 
-    if (trie == NULL) {
+    if (trie == NULL) { // If there's a malloc error, we return with NULL.
         printf("error malloc");
         return NULL;
     }
 
-    for (int i = 0; i < ALPHABET; i++) {
-        trie->children[i] = NULL;
+    for (int i = 0; i < ALPHABET; i++) { // For each child in the tree...
+        trie->children[i] = NULL; // We initialize the child as NULL.
     }
 
-    trie->isRealisateur = false;
-    trie->movies = createEmptyList();
-    return trie;
+    trie->isRealisateur = false; // We initialize isRealisateur to false.
+    trie->movies = createEmptyList(); // We create an emptyList for the movies...
+    return trie; // And return the trie.
 }
 
+// Used to insert a movie, also returns the amount of movies of said realisateurs
 int insertMovie(struct NodeTrie* trie, struct Movie* m) {
     int i = 0;
-    char* realisateur = toLower(m->realisateur);
+    char* realisateur = toLower(m->realisateur); // We lowercase the whole name of realisateurs
 
-    while (realisateur[i] >= 97 && realisateur[i] <= 123 || realisateur[i] == '-') {
+    while (realisateur[i] >= 97 && realisateur[i] <= 123 || realisateur[i] == '-') { // We change the position according to the name for each char.
         int position;
-        if (realisateur[i] - 97 >= 0 && realisateur[i] - 97 <= 26) {
-            position = realisateur[i]-97;
+        if (realisateur[i] - 97 >= 0 && realisateur[i] - 97 <= 26) { // If realisateur[i] is a letter in the alphabet...
+            position = realisateur[i]-97; // The position will be the ascii code
         }
         else {
-            position = 26;
+            position = 26; // Else, we'll set it to 26
         }
-        if (trie->children[position] == NULL) {
-            trie->children[position] = createEmptyNodeTrie();
+        if (trie->children[position] == NULL) { // If the children at the said position is null...
+            trie->children[position] = createEmptyNodeTrie(); // We initialize a new node tree.
         }
-        trie = trie->children[position];
-        i++;
+        trie = trie->children[position]; // And we go to the said level of the trie
+        i++; // We add 1 to i, then start again.
     }
     trie->isRealisateur = true;
-    addFirst(trie->movies, m);
+    addFirst(trie->movies, m); // We add the movie to the list.
 
     int ret = trie->movies->size;
 
-    return ret;
+    return ret; // We return the number of movies of the realisateur.
 }
 
-void deleteWord(struct NodeTrie* trie, char* word) {
-    int i = 0;
-
-    while (word[i] >= 97 && word[i] <= 123) {
-        if (trie->children[word[i]-97] == NULL) {
-            return;
-        }
-        trie = trie->children[word[i]-97];
-        i++;
-    }
-    trie->isRealisateur = false;
-}
-
-//struct List* findMovies(struct NodeTrie* trie, char* realisateur) {
-//    int i = 0;
-//    struct NodeTrie* temp = trie;
-//    int pos = 0;
-//
-//    while (i < strlen(realisateur)) {
-//        pos = charToInt(realisateur[i]);
-//        if (temp->children[pos] == NULL) {
-//            return NULL;
-//        }
-//        temp = temp->children[pos];
-//        i++;
-//    }
-//    return temp->movies;
-//}
-
+// Used to find all the movies that start with the char* realisateur.
 struct List* findAllMovies(struct NodeTrie* trie, char* realisateur, struct List* result) {
     int i = 0;
-    struct NodeTrie* temp = trie;
-    int pos = 0;
+    struct NodeTrie* temp = trie; // We create a temporary trie.
+    int pos;
 
-    while (i < strlen(realisateur)) {
-        pos = charToInt(realisateur[i]);
-        if (temp->children[pos] == NULL) {
-            return result;
+    while (i < strlen(realisateur)) { // We go through the whole name of the realisateur.
+        pos = charToInt(realisateur[i]); // We convert the char to an int.
+        if (temp->children[pos] == NULL) { // If the children is null (doesn't exist)
+            return result; // We return nothing
         }
-        temp = temp->children[pos];
-        i++;
+        temp = temp->children[pos]; // Else, we go to said children
+        i++; // And starts again by adding 1 to i.
     }
-    if (temp->isRealisateur) {
-        result = addFromList(result, temp->movies);
+    if (temp->isRealisateur) { // If it's a realisateurs...
+        result = addFromList(result, temp->movies); // We add it to the list.
     }
-    for (int j = 0; j < ALPHABET; j++) {
-        if (temp->children[j] != NULL) {
-            findAllMovies(temp->children[j], "", result);
+    for (int j = 0; j < ALPHABET; j++) { // We visit the chldren one by one...
+        if (temp->children[j] != NULL) { // If one of the children isn't null...
+            findAllMovies(temp->children[j], "", result); // We use recursion to find all the movies to those children.
         }
     }
-    return result;
+    return result; // We return the list with all the movies.
 }
 
+// Used to find the movies that are from the char* realisateur (has to be EXACTLY the same)
 struct NodeTrie* findMovies(struct NodeTrie* trie, char* realisateur) {
     int i = 0;
-    struct NodeTrie* temp = trie;
-    int pos = 0;
+    struct NodeTrie* temp = trie; // We create an empty trie...
+    int pos;
 
-    while (i < strlen(realisateur)) {
-        pos = charToInt(realisateur[i]);
-        if (temp->children[pos] == NULL) {
-            return NULL;
+    while (i < strlen(realisateur)) { // We visit the whole char*.
+        pos = charToInt(realisateur[i]); // We convert the char to an int.
+        if (temp->children[pos] == NULL) { // If the children is null...
+            return NULL; // We return null.
         }
-        temp = temp->children[pos];
-        i++;
+        temp = temp->children[pos]; // Else, we go to said children.
+        i++; // And add 1 to i.
     }
-    return temp;
+    return temp; // We return temp, which is the trie with all the movies.
 }
 
-unsigned int numberOfWords(struct NodeTrie* trie) {
-    unsigned int sum = 0;
-    for (int i = 0; i < ALPHABET; i++) {
-        if (trie->children[i] != NULL) {
-            sum += getIsWord(trie->children[i]) + numberOfWords(trie->children[i]);
-        }
-    }
-    return sum;
-}
-
+// Export all the realisateurs to a specified textFile.
 void exportAllFromRealisateurs(struct NodeTrie* trie, char* realisateur, char* textFile) {
-    struct timespec start;
+    struct timespec start; // We start the timer.
     clock_gettime(CLOCK_MONOTONIC, &start);
-    struct List* l = createEmptyList();
-    findAllMovies(trie, realisateur, l);
-    struct timespec end;
+    struct List* l = createEmptyList(); // We create an empty list
+    findAllMovies(trie, realisateur, l); // Find all the movies that correspond to the char* realisateur.
+    struct timespec end; // We end the timer.
     clock_gettime(CLOCK_MONOTONIC, &end);
-    double time_taken = difftime(end.tv_sec, start.tv_sec) + (end.tv_nsec - start.tv_nsec) / 1e9;
+    double time_taken = difftime(end.tv_sec, start.tv_sec) + (end.tv_nsec - start.tv_nsec) / 1e9; // We calculate the difference of time between the end and the start.
     char* line;
     char duree[5];
 
     FILE *p1;
-    p1 = fopen(textFile, "w");
-    fprintf(p1, "%fs\n", time_taken);
+    p1 = fopen(textFile, "w"); // We open (or create) a file according to the textFile variable.
+    fprintf(p1, "%fs\n", time_taken); // We add the time taken at the beginning of the file.
 
-    unsigned int size = listSize(l);
-    for (int i = 0; i < size; i++) {
-        fprintf(p1, l->head->movie->titre);
+    unsigned int size = listSize(l); // We take the size of the list.
+    for (int i = 0; i < size; i++) { // We loop to visit the whole list.
+        fprintf(p1, l->head->movie->titre); // We add the movie to the file.
         fprintf(p1, ";");
         fprintf(p1, l->head->movie->realisateur);
         fprintf(p1, ";");
@@ -250,124 +142,27 @@ void exportAllFromRealisateurs(struct NodeTrie* trie, char* realisateur, char* t
         fprintf(p1, l->head->movie->genre);
         fprintf(p1, "\n");
 
-        l->head = l->head->next;
+        l->head = l->head->next; // We go to the next element.
     }
-
-
-
-    fclose(p1);
+    fclose(p1); // We close the file.
 }
 
-void exportFromRealisateurs(struct NodeTrie* trie, char* realisateur, char* textFile) {
-    struct NodeTrie* t = findMovies(trie, realisateur);
-    char* line;
-    char duree[5];
-
-    FILE *p1;
-    p1 = fopen(textFile, "w");
-
-    unsigned int size = listSize(t->movies);
-    for (int i = 0; i < size; i++) {
-        fprintf(p1, t->movies->head->movie->titre);
-        fprintf(p1, ";");
-        fprintf(p1, t->movies->head->movie->realisateur);
-        fprintf(p1, ";");
-        sprintf(duree, "%d", t->movies->head->movie->duree);
-        fprintf(p1, duree);
-
-        fprintf(p1, ";");
-        fprintf(p1, t->movies->head->movie->genre);
-        fprintf(p1, "\n");
-
-        t->movies->head = t->movies->head->next;
-    }
-
-    struct NodeTrie* temp;
-    for (int i = 0; i < ALPHABET; i++) {
-        if (t->children[i] != NULL) {
-            temp = t->children[i];
-
-            while (!temp->isRealisateur) {
-                for (int j = 0; j < ALPHABET; j++) {
-                    if (temp->children[i] != NULL) {
-                        temp = temp->children[i];
-                    }
-                }
-            }
-
-            unsigned int tempSize = listSize(temp->movies);
-            for (int i = 0; i < tempSize; i++) {
-                fprintf(p1, temp->movies->head->movie->titre);
-                fprintf(p1, ";");
-                fprintf(p1, temp->movies->head->movie->realisateur);
-                fprintf(p1, ";");
-                sprintf(duree, "%d", temp->movies->head->movie->duree);
-                fprintf(p1, duree);
-
-                fprintf(p1, ";");
-                fprintf(p1, temp->movies->head->movie->genre);
-                fprintf(p1, "\n");
-
-                temp->movies->head = temp->movies->head->next;
-            }
-        }
-    }
-    fclose(p1);
-}
-
-void displayDict(struct NodeTrie* trie, char* actualWord, int index) {
-    if (trie->isRealisateur) {
-        actualWord[index] = '\0';
-        printf("%s\n", actualWord);
-    }
-
-    for (int i = 0; i < ALPHABET; i++) {
-        if (trie->children[i] != NULL) {
-            actualWord[index] = 'a' + i;
-            displayDict(trie->children[i], actualWord, index+1);
-        }
-    }
-}
-
+// Deletes and free a NodeTrie.
 void deleteNodeTrie(struct NodeTrie** trie) {
-    for (int i = 0; i < ALPHABET; i++) {
-        if ((*trie)->children[i] != NULL) {
-            deleteNodeTrie(&(*trie)->children[i]);
+    for (int i = 0; i < ALPHABET; i++) { // We go through each children...
+        if ((*trie)->children[i] != NULL) { // If it's not set to null...
+            deleteNodeTrie(&(*trie)->children[i]); // We use recursion to delete its children.
         }
     }
-
-//    if ((*trie)->isRealisateur) {
-//        deleteList(&(*trie)->movies);
-//    }
-
-    int size = listSize((*trie)->movies);
-    for (int i = 0; i < size; i++) {
-        struct Cell* c = (*trie)->movies->head;
-        (*trie)->movies->head = (*trie)->movies->head->next;
-        free(c);
+    // Else...
+    int size = listSize((*trie)->movies); // We take the size of the list...
+    for (int i = 0; i < size; i++) { // We go through each element...
+        struct Cell* c = (*trie)->movies->head; // We take the head in a cell.
+        (*trie)->movies->head = (*trie)->movies->head->next; // We point the head to the new head (aka the next element).
+        free(c); // We free the cell.
     }
-    free((*trie)->movies);
+    free((*trie)->movies); // At the end, we free the movies
 
-    free(*trie);
-    *trie = NULL;
-}
-
-
-void writeWord(struct NodeTrie* trie) {
-    printf("Enter a letter: ");
-    char entry[MAX_REALISATEUR_SIZE];
-    scanf("%s", entry);
-
-    struct NodeTrie *select = trie;
-    char buildWord[MAX_REALISATEUR_SIZE];
-    char actualWord[MAX_REALISATEUR_SIZE];
-
-    printf("%d\n", entry[0] - 'a');
-    if (trie->children[entry[0] - 'a'] == NULL) {
-        printf("Aucun mot n'existe dans la base de données !");
-    } else {
-        select = trie->children[entry[0] - 'a'];
-
-        displayDict(select, actualWord, 0);
-    }
+    free(*trie); // We free the trie.
+    *trie = NULL; // We set it to null.
 }
