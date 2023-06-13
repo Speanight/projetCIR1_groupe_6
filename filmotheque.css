@@ -23,6 +23,11 @@ body{
     visibility: visible;
 }
 
+#inter:invalid{
+    color: red;
+    visibility: visible;
+}
+
 #real:valid{
     cursor: pointer;
 }
@@ -59,6 +64,13 @@ input:focus {
 }
 
 #butTime{
+    height: 46px;
+    align-self: right;
+    border: none;
+    border-radius: 0px 15px 15px 0px;
+}
+
+#butInter{
     height: 46px;
     align-self: right;
     border: none;
