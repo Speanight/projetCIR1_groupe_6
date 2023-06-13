@@ -1,3 +1,4 @@
+Jackson;The Lord of the Rings: The Fellowship of the Ring;178;Fantasy
 Allen;Annie Hall;93;Romance
 Allen;Midnight in Paris;94;Comedy
 Anderson;The Grand Budapest Hotel;100;Comedy
@@ -36,7 +37,6 @@ Gerwig;Little Women;135;Drama
 Haynes;Carol;118;Romance
 Howard;Rush;123;Biography
 Jackson;King Kong;187;Adventure
-Jackson;The Lord of the Rings: The Fellowship of the Ring;178;Fantasy
 Jenkins;If Beale Street Could Talk;119;Romance
 Jenkins;Moonlight;111;Drama
 Johnson;Brick;110;Mystery

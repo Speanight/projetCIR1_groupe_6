@@ -57,6 +57,7 @@ function disabledSearch(){
 
 function writeMovies(movies, doc) {
     while(doc.firstChild) {
+        console.log("remove child");
         doc.removeChild(doc.firstChild);
     }
 
@@ -67,6 +68,7 @@ function writeMovies(movies, doc) {
     nbMovies.innerHTML = "Total de films : " + (movies.length-2);
 
     for (let i = 1; i < movies.length - 1; i++) {
+        console.log(movies[i]);
         let movieDetails = movies[i].split(";");
 
         let flexElement = document.createElement("div");

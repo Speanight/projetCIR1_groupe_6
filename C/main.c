@@ -6,16 +6,14 @@
 #include "trie.h"
 #include "movie.h"
 #include "database.h"
-#include "dictionary.h"
 #include <time.h>
 #include <unistd.h>
 
 int main() {
 
-    struct Database* db = buildDataBase("../DB/BD_small.txt");
+    struct Database* db = buildDataBase("../DB/BD_big.txt"); // Creation of the database
 
     bool endServer = false;
-
     FILE* ready;
     FILE* request;
     char line[64];
@@ -23,21 +21,27 @@ int main() {
     char* argumentStr;
     int argumentInt;
     int compare;
+    char* token;
+    char* titre;
+    char* realisateur;
+    int duree;
+    char* genre;
 
 
-    while(!endServer) {
+    while(!endServer) { // Loops while we don't ask to close the server
 
-        request = fopen("../../request.txt", "r");
+        request = fopen("../../request.txt", "r"); // We read the file request.txt
 
-        if (request != NULL) {
+        if (request != NULL) { // If it exists...
             fgets(line, sizeof(line), request);
             remove("../../request.txt");
-            command = strtok(line, ";");
+            token = strtok(line, ";"); // We separate the command from the arguments
+            command = token;
 
-            compare = strcmp(command, "exportAllFromRealisateurs");
+            compare = strcmp(command, "exportAllFromRealisateurs"); // We compare to know which command is being executed
             if (compare == 0) {
-                printf("export from realisateurs!\n");
-                argumentStr = strtok(NULL, ";");
+                printf("export from realisateurs!\n"); // We show in the console what we're doing
+                argumentStr = strtok(NULL, ";"); // We get the following arguments with strtok
                 printf("Argument : %s\n", argumentStr);
                 if (argumentStr != NULL) {
                     exportAllFromRealisateurs(db->triParRealisateurs, argumentStr, "../../result.txt");
@@ -88,50 +92,35 @@ int main() {
                                         char* addDB = strtok(NULL, ";");
                                         addMovie(db, titre, realisateur, duree, genre, addDB);
                                     }
-                                    else {
-                                        compare = strcmp(command, "deleteMovie");
-                                        if (compare == 0) {
-                                            printf("delete a movie!\n");
-                                            char* titre = strtok(NULL, ";");
-                                            char* realisateur = strtok(NULL, ";");
-                                            int duree = atoi(strtok(NULL, ";"));
-                                            char* genre = strtok(NULL, ";");
-                                            deleteMovieFromDetails(db, titre, realisateur, duree, genre);
-                                        }
-                                    }
+//                                    else {
+//                                        compare = strcmp(command, "deleteMovie");
+//                                        if (compare == 0) {
+//                                            printf("delete a movie!\n");
+//                                            token = strtok(NULL, ";");
+//                                            titre = token;
+//                                            token = strtok(NULL, ";");
+//                                            realisateur = token;
+//                                            token = strtok(NULL, ";");
+//                                            duree = atoi(token);
+//                                            token = strtok(NULL, ";");
+//                                            genre = token;
+//                                            deleteMovieFromDetails(db, titre, realisateur, duree, genre);
+//                                        }
+//                                    }
                                 }
                             }
                         }
                     }
                 }
             }
-            fclose(request);
-            ready = fopen("../../ready.txt", "w");
+            fclose(request); // We close the request
+            ready = fopen("../../ready.txt", "w"); // We create the file "ready.txt"
+            printf("Created ready!\n");
             fclose(ready);
-            sleep(1);
-            remove("../../ready.txt");
+            sleep(1); // We add a small delay for the JS
+            remove("../../ready.txt"); // Then we remove ready and loop again
         }
     }
-    deleteDataBase(db);
+
+    deleteDataBase(db); // When we ask to end the server, we free the whole database.
 }
-
-
-
-
-//    exportFromDuration(db, 115, "../test.txt");
-
-//    struct Dictionary* d = createEmptyDictionary();
-//    updateDictionary("../DB/BD_small.txt", d);
-//    findAllMovies(db->triParRealisateurs, "l", l);
-
-//    exportAllFromRealisateurs(db->triParRealisateurs, "l", "../test.txt");
-
-
-
-
-
-//    clock_t end = clock(); //Fin du temps d'execution
-//    timeSpent = timeSpent + (float)(end - begin) / CLOCKS_PER_SEC; // on calcule le temps d'execution en faisant la difference entre le début et la fin de l'execution
-//    // puis on divise par CLOCKS_PER_SEC pour avoir le temps en secondes
-//    return 0;
-//}

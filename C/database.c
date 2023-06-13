@@ -4,17 +4,18 @@
 
 #include "database.h"
 
-
+// Creates an empty Database. (obsolete kind-of)
 struct Database* createEmptyDataBase() {
     struct Database* db = malloc(sizeof(struct Database));
 
+    // If malloc returns an error.
     if (db == NULL) {
         printf("error malloc");
         return NULL;
     }
 
-    db->triParRealisateurs = createEmptyNodeTrie();
-    for (int i = 0; i < DUREE_MAX; i++) {
+    db->triParRealisateurs = createEmptyNodeTrie(); // We initialize a Trie for the realisateurs
+    for (int i = 0; i < DUREE_MAX; i++) { // We initialize a list for each place in the array.
         db->triParDuree[i] = createEmptyList();
     }
 
@@ -24,6 +25,7 @@ struct Database* createEmptyDataBase() {
     return db;
 }
 
+// Adds all movies based on a duration.
 void buildMoviesByDuration(struct Database* db, char* textFile) {
     FILE* p1;
     p1 = fopen(textFile, "r");
@@ -339,30 +341,30 @@ void exportFromInterval(struct Database* db, int durationMin, int durationMax, c
     fclose(p1);
 }
 
-void deleteMovieFromDetails(struct Database* db, char* titre, char* realisateur, int duree, char* genre) {
-    struct List* l = db->triParDuree[duree];
-    printf("titre : %s - l->movie->titre : %s\n", titre, l->head->movie->titre);
-
-    int compare;
-    int size = l->size;
-    for (int i = 0; i < size; i++) {
-        compare = strcmp(l->head->movie->titre, titre);
-        if (compare == 0) {
-            compare = strcmp(l->head->movie->realisateur, realisateur);
-            if (compare == 0) {
-                compare = strcmp(l->head->movie->genre, genre);
-                if (compare == 0) {
-                    struct Cell *c = l->head;
-                    l->head = l->head->next;
-                    deleteMovie(c->movie);
-                    free(c);
-                    return;
-                }
-            }
-        }
-        l->head = l->head->next;
-    }
-}
+//void deleteMovieFromDetails(struct Database* db, char* titre, char* realisateur, int duree, char* genre) {
+//    struct List* l = db->triParDuree[duree];
+//    printf("titre : %s - l->movie->titre : %s\n", titre, l->head->movie->titre);
+//
+//    int compare;
+//    int size = l->size;
+//    for (int i = 0; i < size; i++) {
+//        compare = strcmp(l->head->movie->titre, titre);
+//        if (compare == 0) {
+//            compare = strcmp(l->head->movie->realisateur, realisateur);
+//            if (compare == 0) {
+//                compare = strcmp(l->head->movie->genre, genre);
+//                if (compare == 0) {
+//                    struct Cell *c = l->head;
+//                    l->head = l->head->next;
+//                    deleteMovie(c->movie);
+//                    free(c);
+//                    return;
+//                }
+//            }
+//        }
+//        l->head = l->head->next;
+//    }
+//}
 
 void deleteDataBase(struct Database* db) {
     free(db->realisateurAvecPlusDeFilms);

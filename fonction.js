@@ -131,9 +131,21 @@ function writeNewMovie(titre, realisateur, duree, genre, save, func) {
 function addMovie(event) {
     event.preventDefault();
     let titre = prompt("Entrer le titre du film que vous souhaitez ajouter");
+    while (titre == "") {
+        titre = prompt("Le titre ne peut pas être null, merci de remplir le champ ci-dessous !");
+    }
     let realisateur = prompt("Entrer le nom du réalisateur du film que vous souhaitez ajouter");
+    while (realisateur == "") {
+        realisateur = prompt("Le réalisateur ne peut pas être null, merci de remplir le champ ci-dessous !");
+    }
     let duree = prompt("Entrer la durée du film que vous souhaitez ajouter");
+    while (duree == "" || !(+duree) || Number.isInteger(duree)) {
+        duree = prompt("La durée ne peut pas être null et doit être égal à un nombre entier, merci de remplir le champ ci-dessous !");
+    }
     let genre = prompt("Entrer le genre du film que vous souhaitez ajouter");
+    while (genre == "") {
+        genre = prompt("Le genre ne peut pas être null, merci de remplir le champ ci-dessous !");
+    }
 
     let save = prompt("Souhaitez-vous sauvegarder votre film dans la base de données ? (Y = oui, N = non)");
 
@@ -165,6 +177,8 @@ function deleteMovie(event) {
     let array = text.split("\n");
 
     writeMoviesForDelete(array, doc);
+
+    // readFile();
 }
 
 
