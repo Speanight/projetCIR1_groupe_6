@@ -194,3 +194,15 @@ input:focus {
     scale: 1.25;
     cursor: pointer;
 }
+#timer{
+    margin-top: 10px;
+    margin-left: 10px;
+    font-size: 20px;
+   
+}
+
+#nbMovies{
+    margin-top: 10px;
+    margin-left: 10px;
+    font-size: 20px;
+}
