@@ -173,17 +173,14 @@ function deleteMovie(event) {
 function password(){
     let pageAdmin = document.getElementById("pageAdmin") //On recupère l'id de la balise permettant d'aller à la page admin
     let mot_de_passe = 'motdepasse'; //definition du mot de passe à entrer pour accéder à la page admin
-    pageAdmin.addEventListener("click", function(){ 
-        let mdp = prompt("Entrez le mot de passe pour accéder à la page admin"); //Lorsuq'on clique sur le logo admin, un prompt nous demande d'entrer le mot de passe
-        if(mdp == mot_de_passe){
-            alert("Mot de passe correct");
-            window.location.href = "admin.html"; //Si le mot de passe est correct, on est redirigé vers la page admin
-        }
-        else{
-            alert("Mot de passe incorrect");
-        }
+    let mdp = prompt("Entrez le mot de passe pour accéder à la page admin"); //Lorsuq'on clique sur le logo admin, un prompt nous demande d'entrer le mot de passe
+    if(mdp == mot_de_passe){
+        alert("Mot de passe correct");
+        window.location.href = "admin.html"; //Si le mot de passe est correct, on est redirigé vers la page admin
     }
-    )
+    else{
+        alert("Mot de passe incorrect");
+    }
 }
 
 
