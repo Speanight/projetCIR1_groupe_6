@@ -4,6 +4,7 @@
 
 #include "movie.h"
 
+// Creates an empty movie.
 struct Movie* createEmptyMovie() {
     struct Movie* m = malloc(sizeof(struct Movie));
     if (m != NULL) {
@@ -14,24 +15,25 @@ struct Movie* createEmptyMovie() {
     }
 }
 
+// Creates a movie according to the arguments
 struct Movie* createMovie(char* realisateur, char* titre, int duree, char* genre) {
     struct Movie* m = createEmptyMovie();
-    strcpy(m->realisateur, realisateur);
+    strcpy(m->realisateur, realisateur); // Strcpy to not lose the value with malloc and all.
     strcpy(m->titre, titre);
     m->duree = duree;
     strcpy(m->genre, genre);
-    return m;
+    return m; // We return the movie.
 }
 
+// Used to delete a movie
 void deleteMovie(struct Movie* m) {
-    free(m->titre);
+    free(m->titre); // We free each string...
     m->titre = NULL;
     free(m->realisateur);
     m->realisateur = NULL;
     free(m->genre);
     m->genre = NULL;
     m->duree = 0;
-//    free(m);
     m = NULL;
 
     // Enlever 1 à size !
