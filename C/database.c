@@ -64,7 +64,7 @@ struct Database* buildDataBase(char* textFile) {
 
         token = strtok(NULL, ";"); // Same for the fourth part.
         genre = token; // We initialize genre.
-        genre[strlen(genre)-2] = 0; // Used to get rid of the \r and \n at the end of each line.
+        genre[strlen(genre)-1] = 0; // Used to get rid of the \r and \n at the end of each line.
 
         struct Movie* m = createMovie(realisateur, titre, duree, genre); // We create a movie with those attributes.
         addFirst(list[duree], m); // We add it in the list at the corresponding place thanks to the variable duree.
@@ -76,8 +76,6 @@ struct Database* buildDataBase(char* textFile) {
             strcpy(biggestRealisateur, realisateur); // We replace the new realisateurs with the biggest amount of movies.
         }
     }
-
-    printf("%s -> %d\n", biggestRealisateur, biggestRealisateurMovies); // We printf it to show the biggest realisateurs in the console. Also used to know when the DB is done building.
     fclose(p1); // We close the file.
 
 
@@ -89,6 +87,9 @@ struct Database* buildDataBase(char* textFile) {
     }
 
     db->triParRealisateurs = trie; // We place the trie in the DB at triParRealisateurs.
+
+    printf("Database built!"); // We print to show the DB is done building.
+
     return db; // We return the database.
 }
 

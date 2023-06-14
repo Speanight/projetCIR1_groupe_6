@@ -1,12 +1,6 @@
-//
-// Created by ADMIN on 6/9/2023.
-//
-
-#include "list.h"
 #include "trie.h"
 #include "movie.h"
 #include "database.h"
-#include <time.h>
 #include <unistd.h>
 
 int main() {
@@ -102,7 +96,7 @@ int main() {
             }
             fclose(request); // We close the request
             ready = fopen(readyTxt, "w"); // We create the file "ready.txt"
-            printf("Created ready!\n");
+            printf("Created ready!\n\n");
             fclose(ready);
             sleep(1); // We add a small delay for the JS
             remove(readyTxt); // Then we remove ready and loop again
