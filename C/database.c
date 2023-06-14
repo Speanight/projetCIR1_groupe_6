@@ -88,7 +88,7 @@ struct Database* buildDataBase(char* textFile) {
 
     db->triParRealisateurs = trie; // We place the trie in the DB at triParRealisateurs.
 
-    printf("Database built!"); // We print to show the DB is done building.
+    printf("Database built!\n"); // We print to show the DB is done building.
 
     return db; // We return the database.
 }

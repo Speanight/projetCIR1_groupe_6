@@ -90,8 +90,8 @@ function writeMovies(movies, doc) {
         genre.id = "genre";
         genre.innerHTML = movieDetails[3];
 
-        doc.appendChild(flexElement);
-        flexElement.appendChild(movie);
+        doc.appendChild(movie);
+        // flexElement.appendChild(movie);
         movie.appendChild(titre);
         movie.appendChild(realisateur);
         movie.appendChild(duree);
