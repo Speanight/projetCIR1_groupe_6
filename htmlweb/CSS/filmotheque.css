@@ -209,3 +209,8 @@ input:focus {
     padding-top : 10px;
     padding-left : 20px;
 }
+
+#input3,
+#input4 {
+    padding-right: 50px;
+}
