@@ -147,7 +147,7 @@ function addMovie(event) {
         genre = prompt("Le genre ne peut pas être null, merci de remplir le champ ci-dessous !");
     }
 
-    let save = prompt("Souhaitez-vous sauvegarder votre film dans la base de données ? (Y = oui, N = non)");
+    let save = prompt("Souhaitez-vous sauvegarder votre film dans la base de données ? (Y pour oui, sinon non.)");
 
 
     writeNewMovie(titre, realisateur, duree, genre, save, "addMovie");

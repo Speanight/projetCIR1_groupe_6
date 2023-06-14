@@ -64,7 +64,7 @@ struct Database* buildDataBase(char* textFile) {
 
         token = strtok(NULL, ";"); // Same for the fourth part.
         genre = token; // We initialize genre.
-        genre[strlen(genre)-2] = 0; // Used to get rid of the \r and \n at the end of each line.
+        genre[strlen(genre)-1] = 0; // Used to get rid of the \r and \n at the end of each line.
 
         struct Movie* m = createMovie(realisateur, titre, duree, genre); // We create a movie with those attributes.
         addFirst(list[duree], m); // We add it in the list at the corresponding place thanks to the variable duree.
@@ -76,8 +76,6 @@ struct Database* buildDataBase(char* textFile) {
             strcpy(biggestRealisateur, realisateur); // We replace the new realisateurs with the biggest amount of movies.
         }
     }
-
-    printf("%s -> %d\n", biggestRealisateur, biggestRealisateurMovies); // We printf it to show the biggest realisateurs in the console. Also used to know when the DB is done building.
     fclose(p1); // We close the file.
 
 
@@ -89,6 +87,9 @@ struct Database* buildDataBase(char* textFile) {
     }
 
     db->triParRealisateurs = trie; // We place the trie in the DB at triParRealisateurs.
+
+    printf("Database built!\n"); // We print to show the DB is done building.
+
     return db; // We return the database.
 }
 
@@ -181,17 +182,17 @@ void addMovie(struct Database* db, char* titre, char* realisateur, int duree, ch
         strcpy(db->realisateurAvecPlusDeFilms, realisateur);
     }
 
-    if (addDB == NULL) { // If we don't add it to the database, we just end the function here.
-        return;
-    }
-
     int compare = strcmp(addDB, "Y"); // If the attributes state to add it to the database...
     if (compare == 0) {
         FILE *p1;
         p1 = fopen(db->dbTxt, "a"); // We append to the file...
         fprintf(p1, "%s;%s;%d;%s\n", realisateur, titre, duree, genre); // The new movie at the end.
+        printf("[Added to the txt database file.]\n");
 
         fclose(p1); //Then we close the file.
+    }
+    else {
+        printf("[Temporary added!]\n");
     }
 }
 
@@ -200,6 +201,8 @@ void exportFromInterval(struct Database* db, int durationMin, int durationMax, c
     FILE *p1;
     p1 = fopen(exportFile, "w"); // We open (or create) the file specified by exportFile.
     struct List* l = createEmptyList(); // We create an empty list.
+    struct timespec start; // Initialize the start of the timer.
+    clock_gettime(CLOCK_MONOTONIC, &start);
 
     if (durationMin > durationMax) { // If the min is shorter than the max...
         return; // We return without anything.
@@ -207,12 +210,20 @@ void exportFromInterval(struct Database* db, int durationMin, int durationMax, c
 
     if (durationMin == durationMax) { // If both the min and the max are equal...
         exportFromDuration(db, durationMin, exportFile); // We use the function exportFromDuration.
+        struct timespec end; // We stop the timer.
+        clock_gettime(CLOCK_MONOTONIC, &end);
+        double time_taken = difftime(end.tv_sec, start.tv_sec) + (end.tv_nsec - start.tv_nsec) / 1e9; // Used to calculate the time taken.
+        fprintf(p1, "%fs\n", time_taken); // We add the time taken to the file.
         return;
 }
 
     for (int i = durationMin; i < durationMax+1; i++) { // We take each duration, from the minimum to the maximum...
         l = addFromList(l, db->triParDuree[i]); // We add each element to a list.
     }
+    struct timespec end; // We stop the timer.
+    clock_gettime(CLOCK_MONOTONIC, &end);
+    double time_taken = difftime(end.tv_sec, start.tv_sec) + (end.tv_nsec - start.tv_nsec) / 1e9; // Used to calculate the time taken.
+    fprintf(p1, "%fs\n", time_taken); // We add the time taken to the file.
     unsigned int size = listSize(l); // We take the size of the list...
     char duree[5];
 
