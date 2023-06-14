@@ -137,9 +137,25 @@ input:focus {
     height: 400px;
     width: auto;
 }
-#movie:hover{
-    box-shadow: #73141B 0px 0px 40px 0px;
-    scale: 1.25;
+#movie:hover {
+    animation-name: hoverMovie;
+    animation-fill-mode: forwards;
+    animation-duration: 1s;
+    /* box-shadow: #73141B 0px 0px 40px 0px;
+    scale: 1.25; */
+}
+
+#movies:not(:hover) {
+    animation-name: hoverMovie;
+    animation-fill-mode: backwards;
+    animation-duration: 1s;
+}
+
+@keyframes hoverMovie {
+    0% {scale: 1;
+    box-shadow: black 0px 0px 0px 0px;}
+    100% {scale: 1.25;
+    box-shadow: #73141B 0px 0px 40px 0px;}
 }
 
 #titre {
