@@ -183,6 +183,7 @@ void addMovie(struct Database* db, char* titre, char* realisateur, int duree, ch
     }
 
     if (addDB == NULL) { // If we don't add it to the database, we just end the function here.
+        printf("[Temporary added!]\n");
         return;
     }
 
@@ -191,6 +192,7 @@ void addMovie(struct Database* db, char* titre, char* realisateur, int duree, ch
         FILE *p1;
         p1 = fopen(db->dbTxt, "a"); // We append to the file...
         fprintf(p1, "%s;%s;%d;%s\n", realisateur, titre, duree, genre); // The new movie at the end.
+        printf("[Added to the txt database file.]\n");
 
         fclose(p1); //Then we close the file.
     }

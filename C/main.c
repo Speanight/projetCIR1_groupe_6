@@ -104,4 +104,5 @@ int main() {
     }
 
     deleteDataBase(db); // When we ask to end the server, we free the whole database.
+    printf("Deleted the data base!\n");
 }
